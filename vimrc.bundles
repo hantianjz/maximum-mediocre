@@ -1,0 +1,29 @@
+" Plugins here are part of the CORE Maximum Awesome setup
+" Do NOT add bundles to this list, as they might get removed when you upgrade
+" Maximum Awesome.
+" Please create ~/.vimrc.bundles.local and add any extra bundles you want there
+Plugin 'jaxbot/semantic-highlight.vim'
+Plugin 'austintaylor/vim-indentobject'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'gmarik/vundle'
+Plugin 'tomtom/tlib_vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'Valloric/YouCompleteMe', { 'dir': '~/.vim/bundle/YouCompleteMe/', 'do': './install.py --clang-completer' }
+Plugin 'bling/vim-airline'
+Plugin 'djjcast/mirodark'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'moll/vim-bbye'
+Plugin 'rust-lang/rust.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'wikitopian/hardmode'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
