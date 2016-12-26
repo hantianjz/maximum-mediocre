@@ -1,0 +1,1 @@
+/home/hjz/maximum-mediocre/git/gitalias.bash

@@ -1,0 +1,4 @@
+[ -e ~/.alias ] for F in ~/.alias/*.bash; do source $F; done
+
+export PATH=$PATH:~/bin
+export PATH=$PATH:~/Library/Python/2.7/bin

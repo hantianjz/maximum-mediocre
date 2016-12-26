@@ -13,7 +13,7 @@ call vundle#begin()
 " install Vundle bundles
 if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
- endif
+endif
 
 call vundle#end()
 
@@ -80,8 +80,6 @@ nnoremap <silent> <C-p> :TmuxNavigatePrevious<cr>
 noremap <leader>l :Align
 nnoremap <leader>a :Ag<space>
 " nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
 " nnoremap <leader>t :CtrlP<CR>
 nnoremap <leader>t :FZF<CR>
 " nnoremap <leader>] :TagbarToggle<CR>
@@ -95,7 +93,6 @@ cnoremap w!! %!sudo tee > /dev/null %
 
 " plugin settings
 " let g:ctrlp_match_window = 'order:ttb,max:20'
-let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -210,4 +207,3 @@ set rtp+=~/.fzf
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 let g:fzf_height = 10
 let g:fzf_buffers_jump = 1
-

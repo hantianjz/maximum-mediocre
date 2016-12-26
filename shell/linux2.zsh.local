@@ -1,0 +1,21 @@
+[ -e ~/.alias ] for F in ~/.alias/*.zsh; do source $F; done
+
+export PATH=$PATH:~/bin
+export PATH=$PATH:~/.local/bin
+
+export BUILD_ENABLE_CCACHE=1
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  source ~/.zprezto/modules/zsh-syntax-highliging/zsh-syntax-highlighting.zsh
+fi
+
+zstyle ':completion:*' accept-exact '*(N)'
+
+__git_files () {
+    _wanted files expl 'local files' _files
+}
+
+unsetopt CORRECT                      # Disable autocorrect guesses. Happens when typing a wrong
+                                      # command that may look like an existing one.
