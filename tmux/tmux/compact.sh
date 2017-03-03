@@ -10,36 +10,25 @@
 
 case `uname -s` in
 Darwin)
-	# Reattach to the per-user namespace to access the pasteboard.
-	# For macOS Sierra, specify  `--with-wrap-pbcopy-and-pbpaste`
-	# when installing reattach-to-user-namespace via brew(1);
-	# see: https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard,
-	#      http://superuser.com/a/413233.
-	tmux set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
-	# Key Bindings
-	tmux bind-key -t vi-copy Enter copy-pipe "pbcopy"
-	tmux bind-key -t vi-copy y     copy-pipe "pbcopy"
-	tmux bind-key ] run-shell "pbpaste | tmux load-buffer - && tmux paste-buffer"
+    # Setup 'v' to begin selection as in Vim
+    bind-key -t vi-copy v begin-selection
+    bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
 
-    # Enable native Mac OS X copy/paste
-    set-option -g default-command "/bin/bash -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
-
-    # Disable assume-paste-time, so that iTerm2's "Send Hex Codes" feature works
-    # with tmux 2.1. This is backwards-compatible with earlier versions of tmux,
-    # AFAICT.
-    set-option -g assume-paste-time 0
+    # Update default binding of `Enter` to also use copy-pipe
+    unbind -t vi-copy Enter
+    bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 	;;
 Linux)
-	# Disable terminal clipboard when using gnome-terminal;
-	# see: http://askubuntu.com/a/507215.
-	tmux set-option -g set-clipboard off
+    # Setup 'v' to begin selection as in Vim
+    bind-key -t vi-copy v begin-selection
+    bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace xclip -sel clip -i"
 
-	# Key Bindings
-	tmux bind-key -t vi-copy Enter copy-pipe "xsel -i -b"
-	tmux bind-key -t vi-copy y     copy-pipe "xsel -i -b"
-	tmux bind-key ] run-shell "xsel -o -b | tmux load-buffer - && tmux paste-buffer"
+    # Update default binding of `Enter` to also use copy-pipe
+    unbind -t vi-copy Enter
+    bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace xclip -sel clip -i"
+
 	;;
 esac
 
