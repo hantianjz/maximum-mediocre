@@ -2,3 +2,13 @@
 
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/Library/Python/2.7/bin
+
+pushd () {
+    command pushd "$@" > /dev/null
+}
+
+popd () {
+    command popd "$@" > /dev/null
+}
+
+alias cd=pushd

@@ -4,3 +4,13 @@ export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 
 export BUILD_ENABLE_CCACHE=1
+
+pushd () {
+    command pushd "$@" > /dev/null
+}
+
+popd () {
+    command popd "$@" > /dev/null
+}
+
+alias cd=pushd

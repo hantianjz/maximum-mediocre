@@ -5,7 +5,8 @@ import subprocess
 import sys
 import os
 
-LINK_FILES = [('alias',        '~/.alias')]
+LINK_FILES = [('alias',                         '~/.alias'),
+              ('scripts/sync_to_client',        '~/bin/sync_to_client')]
 
 def install():
     print "Linking folders"
