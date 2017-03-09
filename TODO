@@ -1,0 +1,10 @@
+packager install:
+git
+python2
+pip
+tmux
+vim/nvim
+zsh
+cmake
+vim post-install
+install pip neovim for ycm support
