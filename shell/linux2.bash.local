@@ -14,3 +14,11 @@ popd () {
 }
 
 alias cd=pushd
+
+new-tmux-from-dir-name () {
+    tmux new-session -As $(basename $PWD)
+}
+
+alias tmn="new-tmux-from-dir-name"
+alias tml='tmux list-sessions'
+
