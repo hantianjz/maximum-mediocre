@@ -35,17 +35,17 @@ bind-key C-o kill-pane -a
 bind-key o   kill-pane -a
 
 # Resizing Panes
-bind-key -   resize-pane -D
-bind-key +   resize-pane -U
-bind-key <   resize-pane -L
-bind-key >   resize-pane -R
-bind-key _   resize-pane -Z
+# bind-key -   resize-pane -D
+# bind-key +   resize-pane -U
+# bind-key <   resize-pane -L
+# bind-key >   resize-pane -R
+# bind-key _   resize-pane -Z
 
 # Detect if pane is running vim(1), based on vim-tmux-navigator;
 # see: https://github.com/christoomey/vim-tmux-navigator.
 is_vim="ps -o comm= -t #{pane_tty} | grep -E -i -q '(vi|vim(diff)?)$'"
 
-bind-key -n C-w if-shell "$is_vim" "send-keys C-w" "switch-client -T vi-select"
+# bind-key -n C-w if-shell "$is_vim" "send-keys C-w" "switch-client -T vi-select"
 
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-h) || tmux select-pane -L"
 bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-j) || tmux select-pane -D"
