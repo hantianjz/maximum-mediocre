@@ -24,8 +24,6 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
-[init]
-	templatedir = ~/.git_template
 [rerere]
 	enabled = 1
 [pull]
