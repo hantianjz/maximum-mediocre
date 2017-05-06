@@ -16,26 +16,28 @@ def install():
         dest = util.fix_home_path(dest)
         util.link_file(orig, dest)
 
-    shell = os.path.basename(os.environ["SHELL"])
+    shells = ["zsh", "bash"]
 
-    # Include shell settings by adding sourcing line
-    local_rc = "%s.%s.local" % (sys.platform, shell)
-    source_local_rc_str = "source ~/.bashrc.local"
-    util.link_file(os.path.join(os.path.dirname(__file__), local_rc),
-                   util.fix_home_path("~/.bashrc.local"))
+    for shell in shells:
+        # Include shell settings by adding sourcing line
+        local_rc = "%s.%s.local" % (sys.platform, shell)
+        local_rc_file = "%src.local" % shell
+        source_local_rc_str = "source ~/.%s" % local_rc_file
+        util.link_file(os.path.join(os.path.dirname(__file__), local_rc),
+                util.fix_home_path("~/.%s" % local_rc_file))
 
-    # Add souce line to *rc files
-    rc_file_name = os.path.abspath(os.path.join(util.get_home_path(), ".%src" % shell))
-    print "checking if rc file exist: %s" % rc_file_name
-    if os.path.exists(rc_file_name):
-        try:
-            # some bash string escaping, hopefully it works for zsh
-            subprocess.check_output("grep '%s' %s" % (source_local_rc_str, rc_file_name), shell=True)
-        except subprocess.CalledProcessError as e:
-            print "sourcing alias dir in %s" % rc_file_name
-            rc_file = open(rc_file_name, "a")
-            rc_file.write(source_local_rc_str)
-            rc_file.close()
+        # Add souce line to *rc files
+        rc_file_name = os.path.abspath(os.path.join(util.get_home_path(), ".%src" % shell))
+        print "checking if rc file exist: %s" % rc_file_name
+        if os.path.exists(rc_file_name):
+            try:
+                # some bash string escaping, hopefully it works for zsh
+                subprocess.check_output("grep '%s' %s" % (source_local_rc_str, rc_file_name), shell=True)
+            except subprocess.CalledProcessError as e:
+                print "sourcing alias dir in %s" % rc_file_name
+                rc_file = open(rc_file_name, "a")
+                rc_file.write(source_local_rc_str)
+                rc_file.close()
 
 
 

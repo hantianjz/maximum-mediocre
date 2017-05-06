@@ -1,7 +1,14 @@
-[ -e ~/.alias ] for F in ~/.alias/*.zsh; do source $F; done
+
+if [ -e ~/.alias ]; then
+    for F in ~/.alias/*.zsh; do
+        source $F;
+    done
+fi
 
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.gem/ruby/2.3.0/bin/
+export PATH=$PATH:~/Android/Sdk/platform-tools
 
 export BUILD_ENABLE_CCACHE=1
 

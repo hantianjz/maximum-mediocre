@@ -14,3 +14,4 @@ def link_file(orig, dest):
     except Exception:
         pass
     os.symlink(orig, dest)
+    print "symlinked %s -> %s" % (orig, dest)
