@@ -7,6 +7,7 @@ import os
 LINK_FILES = [('dot_vim',          '~/.vim'),
               ('dot_vim',          '~/.config/nvim'),
               ('vimrc',            '~/.vimrc'),
+              ('vimrc',            '~/.config/nvim/init.vim'),
               ('vimrc.bundles',    '~/.vimrc.bundles'),
               ]
 

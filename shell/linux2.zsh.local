@@ -5,12 +5,14 @@ if [ -e ~/.alias ]; then
     done
 fi
 
+export CCACHE_DIR=/data/ccache
+export CCACHE_MAXSIZE="30G"
+export USE_CCACHE=1
+
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.gem/ruby/2.3.0/bin/
 export PATH=$PATH:~/Android/Sdk/platform-tools
-
-export BUILD_ENABLE_CCACHE=1
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then

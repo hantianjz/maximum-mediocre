@@ -26,7 +26,7 @@ set cino=(0
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
 set backupcopy=yes                                           " see :help crontab
-set clipboard=unnamedplus                                    " yank and paste with the system clipboard
+set clipboard+=unnamedplus                                    " yank and paste with the system clipboard
 set directory-=.                                             " don't store swapfiles in the current directory
 set encoding=utf-8
 set expandtab                                                " expand tabs to spaces
@@ -52,9 +52,9 @@ set nohlsearch                                               " Disable seach hig
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
-if exists('$TMUX')  " Support resizing in tmux
-  set ttymouse=xterm2
-endif
+" if exists('$TMUX')  " Support resizing in tmux
+"   set ttymouse=xterm2
+" endif
 
 set background=dark
 
@@ -79,12 +79,10 @@ nnoremap <silent> <C-p> :TmuxNavigatePrevious<cr>
 
 noremap <leader>l :Align
 nnoremap <leader>a :Ag<space>
-" nnoremap <leader>b :CtrlPBuffer<CR>
-" nnoremap <leader>t :CtrlP<CR>
 nnoremap <leader>t :FZF<CR>
-" nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
-nnoremap <leader>c <Plug>Kwbd
+
+noremap <leader>C :SemanticHighlightToggle<CR>
 
 nmap s <Plug>(easymotion-overwin-f2)
 
@@ -172,7 +170,6 @@ let g:syntastic_c_no_default_include_dirs = 1
 let g:syntastic_c_check_header = 1
 let g:syntastic_c_include_dirs = [ 'inc', 'includes' ]
 let g:syntastic_c_compiler = 'gcc'
-let g:syntastic_c_compiler_options = '-DTARGET_WIN=0'
 let g:syntastic_c_auto_refresh_includes = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:syntastic_enable_highlighting = 0
@@ -181,21 +178,10 @@ let g:syntastic_python_checkers=["flake8"]
 let g:syntastic_python_flake8_args="--ignore=E501"
 autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
-" let g:airline#extensions#tabline#enabled = 1
-
-"let g:solarized_termcolors=256
-" let g:ctrlp_regexp = 1
-" let g:ctrlp_open_new_file = 't'
-
 nnoremap <Leader>q :Bdelete<CR>
-let g:ycm_global_ycm_extra_conf = '~/Development/maximum-awesome/ycm_conf/ycm_riker_conf.py'
 
 let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,125,124,19]
 let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java"]
-let g:semanticBlacklistOverride = {'c': ['define', 'typedef', 'struct', 'enum', 'for', 'if', 'static', 'void']}
-
-" Vim hardmode
-" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 

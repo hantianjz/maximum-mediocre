@@ -1,5 +1,9 @@
 [ -e ~/.alias ] && for F in ~/.alias/*.bash; do source $F; done
 
+export CCACHE_DIR=/data/ccache
+export CCACHE_MAXSIZE="30G"
+export USE_CCACHE=1
+
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.gem/ruby/2.3.0/bin/

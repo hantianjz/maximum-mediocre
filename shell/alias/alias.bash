@@ -1,3 +1,5 @@
+alias vim=nvim
+
 # Convenient stuff
 alias ..="cd .."
 alias ...="cd ../.."

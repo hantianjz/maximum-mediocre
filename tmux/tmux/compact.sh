@@ -12,22 +12,22 @@ case `uname -s` in
 Darwin)
 
     # Setup 'v' to begin selection as in Vim
-    bind-key -t vi-copy v begin-selection
-    bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+    bind-key -Tcopy-mode-vi v send -X begin-selection
+    bind-key -Tcopy-mode-vi y send -X copy-pipe "reattach-to-user-namespace pbcopy"
 
     # Update default binding of `Enter` to also use copy-pipe
-    unbind -t vi-copy Enter
-    bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+    unbind -Tcopy-mode-vi Enter
+    bind-key -Tcopy-mode-vi Enter send -X copy-pipe "reattach-to-user-namespace pbcopy"
 
 	;;
 Linux)
     # Setup 'v' to begin selection as in Vim
-    bind-key -t vi-copy v begin-selection
-    bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace xclip -sel clip -i"
+    bind-key -Tcopy-mode-vi v begin-selection
+    bind-key -Tcopy-mode-vi y send -X copy-pipe "reattach-to-user-namespace xclip -sel clip -i"
 
     # Update default binding of `Enter` to also use copy-pipe
-    unbind -t vi-copy Enter
-    bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace xclip -sel clip -i"
+    # unbind -Tcopy-mode-vi Enter
+    # bind-key -Tcopy-mode-vi Enter send -X copy-pipe "reattach-to-user-namespace xclip -sel clip -i"
 
 	;;
 esac
