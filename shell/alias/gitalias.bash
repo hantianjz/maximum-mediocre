@@ -1,1 +1,1 @@
-/home/hjz/maximum-mediocre/git/gitalias.bash
+/home/hjz/.config/maximum-mediocre/git/gitalias.bash

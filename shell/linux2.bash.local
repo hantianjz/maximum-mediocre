@@ -9,8 +9,6 @@ export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.gem/ruby/2.3.0/bin/
 export PATH=$PATH:~/Android/Sdk/platform-tools
 
-export BUILD_ENABLE_CCACHE=1
-
 pushd () {
     command pushd "$@" > /dev/null
 }

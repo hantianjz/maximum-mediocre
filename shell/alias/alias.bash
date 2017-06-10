@@ -5,8 +5,12 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+EXIST_VIM=`command -v vim`
+if [ -z $EXIST_VIM ]; then
+	alias vim=nvim
+fi
+
 alias l="ls -Gal"
-alias ls="ls -G"
 alias ll="ls -Ghal"
 alias empties="find . -empty -type d -maxdepth 2"
 tableflip() {

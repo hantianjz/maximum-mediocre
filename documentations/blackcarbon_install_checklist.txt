@@ -109,7 +109,11 @@ GRUB_CMDLINE_LINUX="... cryptdevice=UUID=959463b9-c6c8-43d7-8dbc-0c5067817943:lv
 GRUB_ENABLE_CRYPTODISK=y
 ----------------------------------------------------------------
 
+Install new initramfs
+# mkinitcpio -p linux
 
+# grub-mkconfig -o /boot/grub/grub.cfg
+# grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
 
 AFTER REBOOTING
 
@@ -168,3 +172,19 @@ INSTALL GOOGLE-CHROME
 
 FONTS
 # pacman -S ttf-dejavu
+
+
+setup yubikey
+https://wiki.archlinux.org/index.php/yubikey
+
+Setup gopass
+
+gopass dmenu
+
+i3 remove boarder
+
+# pacman -S vlc qt4
+
+# pacman -S adobe-source-han-sans-otc-fonts
+
+# pacman -S pulse pulseaudio-alsa libpulse alsa-plugins
