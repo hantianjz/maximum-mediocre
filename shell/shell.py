@@ -19,11 +19,8 @@ def install():
 
     for shell in shells:
         # Include shell settings by adding sourcing line
-        local_rc = "%s.%s.local" % (sys.platform, shell)
         local_rc_file = "%src.local" % shell
         source_local_rc_str = "source ~/.%s" % local_rc_file
-        util.link_file(os.path.join(os.path.dirname(__file__), local_rc),
-                util.fix_home_path("~/.%s" % local_rc_file))
 
         # Add souce line to *rc files
         rc_file_name = os.path.abspath(os.path.join(util.get_home_path(), ".%src" % shell))

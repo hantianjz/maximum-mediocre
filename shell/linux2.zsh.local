@@ -7,11 +7,3 @@ fi
 
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
-export PATH=$PATH:~/.gem/ruby/2.3.0/bin/
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-  source ~/.zprezto/modules/zsh-syntax-highliging/zsh-syntax-highlighting.zsh
-fi
-
