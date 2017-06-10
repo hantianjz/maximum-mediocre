@@ -5,29 +5,13 @@ if [ -e ~/.alias ]; then
     done
 fi
 
-export CCACHE_DIR=/data/ccache
-export CCACHE_MAXSIZE="30G"
-export USE_CCACHE=1
-
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.gem/ruby/2.3.0/bin/
-export PATH=$PATH:~/Android/Sdk/platform-tools
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
   source ~/.zprezto/modules/zsh-syntax-highliging/zsh-syntax-highlighting.zsh
 fi
-
-zstyle ':completion:*' accept-exact '*(N)'
-
-__git_files () {
-    _wanted files expl 'local files' _files
-}
-
-source <(gopass completion zsh)
-
-unsetopt CORRECT                      # Disable autocorrect guesses. Happens when typing a wrong
-                                      # command that may look like an existing one.
 
