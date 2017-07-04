@@ -1,9 +1,0 @@
-
-if [ -e ~/.alias ]; then
-    for F in ~/.alias/*.zsh; do
-        source $F;
-    done
-fi
-
-export PATH=$PATH:~/bin
-export PATH=$PATH:~/.local/bin

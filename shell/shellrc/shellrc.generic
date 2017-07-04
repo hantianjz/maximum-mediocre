@@ -1,0 +1,35 @@
+if [ -z "$CURR_FILE_DIR" ]; then
+    echo "Error: expected CURR_FILE_DIR to be set"
+    exit 1
+fi
+
+source ${CURR_FILE_DIR}/shell_helper
+
+export PATH=$PATH:~/bin
+
+if [ `uname` = "Linux" ]; then
+    export PATH=$PATH:~/.local/bin
+    # TODO: Check if JAVA_HOME need to be set
+elif [ `uname` = "Darwin" ]; then
+    export PATH=$PATH:~/Library/Python/2.7/bin
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+fi
+
+source ${CURR_FILE_DIR}/default.alias
+
+if exist tmux; then
+    new-tmux-from-dir-name () {
+        tmux new-session -As $(basename $PWD)
+    }
+
+    alias tmn="new-tmux-from-dir-name"
+    alias tml='tmux list-sessions'
+fi
+
+if exist git; then
+    source ${CURR_FILE_DIR}/git.alias
+fi
+
+if exist nvim; then
+    alias vim=nvim
+fi
