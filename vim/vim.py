@@ -1,5 +1,5 @@
 from git import git
-import util
+from util import util
 
 import subprocess
 import os

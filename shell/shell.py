@@ -5,44 +5,68 @@ import subprocess
 
 from util import util
 
+class ShellRC(object):
 
-def install():
-    shells = ["bash", "zsh"]
-    for shell in shells:
-        # Include shellrc.* to corresponding rc file
+    def __init__(self, shell):
+        self.shell = shell
 
         # Get absolute path of the shellrc file
-        shellrc_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "shellrc", "shellrc.%s" % shell)
+        self.rc_file = os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                "shellrc",
+                "shellrc.%s" % shell)
 
-        if not os.path.isfile(shellrc_file):
-            print "%s not a file or does not exist, skipping setup for _%s_" % (shellrc_file, shell)
-            continue
+        # The souce line to *rc files
+        self.source_str = "source %s" % self.rc_file
 
         # Get absolute path of the target shell rc file
-        target_rc_file = os.path.join(util.get_home_path(), ".%src" % shell)
+        self.target_rc_file = os.path.join(util.get_home_path(), ".%src" % shell)
 
-        # TODO: more intelligent search and insert/replace
-        insert_string = "source %s" % shellrc_file
+
+    """ Include shellrc.* to corresponding rc file """
+    def install(self):
+        if not os.path.isfile(self.rc_file):
+            print "%s not a file or does not exist, skipping setup for _%s_" % (self.rc_file, shell)
+            return
+
         # Add souce line to *rc files
-        if os.path.exists(target_rc_file):
-            print "target shell rc file %s exist" % target_rc_file
+        if os.path.exists(self.target_rc_file):
+            print "target shell rc file %s exist" % self.target_rc_file
 
-            if not util.str_exist_in_file(target_rc_file, insert_string):
-                print "inserting line \"%s\"" % insert_string
-                rc_file = open(target_rc_file, "a")
-                rc_file.write(insert_string)
-                rc_file.close()
+            # TODO: more intelligent search and append/replace
+            if not util.str_exist_in_file(self.target_rc_file, self.source_str):
+                print "Append line \"%s\"" % self.source_str
+                util.append_str_into_file(self.target_rc_file, self.source_str)
             else:
-                print "Already exist line \"%s\"" % insert_string
+                print "Already exist line \"%s\"" % self.source_str
         else:
-            print "%s does not exist, creating!" % target_rc_file
-            rc_file = open(target_rc_file, "a")
-            rc_file.write(insert_string)
-            rc_file.close()
+            print "%s does not exist, creating!" % self.target_rc_file
+            util.append_str_into_file(self.target_rc_file, self.source_str)
+
+
+    def uninstall(self):
+        if os.path.exists(self.target_rc_file):
+            print "target shell rc file %s exist" % self.target_rc_file
+            if util.str_exist_in_file(self.target_rc_file, self.source_str):
+                print "Removing line \"%s\"" % self.source_str
+                util.remove_str_into_file(self.target_rc_file, self.source_str)
+
+    def get_shell_path(self):
+        return "something random"
+
+
+SHELLRCS = [ShellRC("bash"), ShellRC("zsh")]
+
+
+def install():
+    for shell in SHELLRCS:
+        if shell.get_shell_path():
+            shell.install()
 
 
 def uninstall():
-    raise NotImplementedError()
+    for shell in SHELLRCS:
+        shell.uninstall()
 
 
 def verify():
@@ -54,9 +78,9 @@ def dryrun():
 
 
 def checkdeps():
-    shell = os.environ["SHELL"]
-    print "Current shell: %s" % shell
-    return True if shell else False
+    for shell in SHELLRCS:
+        print "Current shell: %s" % shell.get_shell_path()
+        return True if shell.get_shell_path() else False
 
 
 __all__ = ['install', 'uninstall', 'verify', 'dryrun', 'checkdeps']
