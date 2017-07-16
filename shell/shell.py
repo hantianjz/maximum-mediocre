@@ -47,8 +47,12 @@ class ShellRC(object):
     def uninstall(self):
         if os.path.exists(self.target_rc_file):
             print "target shell rc file %s exist" % self.target_rc_file
-            print "Removing line \"%s\"" % self.source_str
-            util.remove_str_into_file(self.target_rc_file, self.source_str)
+            if util.str_exist_in_file(self.target_rc_file, self.source_str):
+                print "Removing line \"%s\"" % self.source_str
+                util.remove_str_into_file(self.target_rc_file, self.source_str)
+
+    def get_shell_path(self):
+        return "something random"
 
 
 SHELLRCS = [ShellRC("bash"), ShellRC("zsh")]
