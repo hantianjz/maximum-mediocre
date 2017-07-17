@@ -8,8 +8,8 @@
 # to bridge this divide so a common tmux.conf can be used on different
 # systems running different versions without issue.
 
-version=`tmux -V | cut -c 6-`
 has_version() {
+    [ -z "$version" ] && version=`tmux -V | cut -c 6-`
     return `echo $@ | awk "{print (($version >= \$1) == 0)}"`
 }
 
@@ -59,13 +59,13 @@ if has_version 2.4; then
     tmux bind-key -T copy-mode-vi V      send-keys -X select-line
     tmux bind-key -T copy-mode-vi r      send-keys -X rectangle-toggle
 else
-    bind-key -t vi-copy C-j    page-down
-    bind-key -t vi-copy C-k    page-up
+    tmux bind-key -t vi-copy C-j    page-down
+    tmux bind-key -t vi-copy C-k    page-up
 
-    bind-key -t vi-copy Escape cancel
-    bind-key -t vi-copy v      begin-selection
-    bind-key -t vi-copy V      select-line
-    bind-key -t vi-copy r      rectangle-toggle
+    tmux bind-key -t vi-copy Escape cancel
+    tmux bind-key -t vi-copy v      begin-selection
+    tmux bind-key -t vi-copy V      select-line
+    tmux bind-key -t vi-copy r      rectangle-toggle
 fi
 
 # Mouse Support
