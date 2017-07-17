@@ -1,0 +1,5 @@
+xset b off
+setxkbmap -option ctrl:nocaps
+xrdb -merge ~/.Xresources
+
+exec i3
