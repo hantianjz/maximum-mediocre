@@ -6,6 +6,7 @@ import os
 
 LINK_FILES = [('dot_vim',          '~/.vim'),
               ('dot_vim',          '~/.config/nvim'),
+              ('vimrc',            '~/.config/nvim/init.vim'),
               ('vimrc',            '~/.vimrc'),
               ('vimrc',            '~/.config/nvim/init.vim'),
               ('vimrc.bundles',    '~/.vimrc.bundles'),
@@ -23,10 +24,11 @@ def install(neovim=False):
     for orig, dest in LINK_FILES:
         orig = os.path.join(os.path.dirname(__file__), orig)
         dest = util.fix_home_path(dest)
+        print orig, dest
         util.link_file(orig, dest)
     _install_github_bundle("VundleVim", "Vundle.vim")
     # Install all the plugins using vundle
-    subprocess.check_call('vim +PluginInstall +qall'.split())
+    subprocess.check_call('nvim +PluginInstall +qall'.split())
 
 
 def uninstall():
