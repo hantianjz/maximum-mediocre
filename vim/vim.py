@@ -12,23 +12,51 @@ LINK_FILES = [('dot_vim',          '~/.vim'),
               ('vimrc.bundles',    '~/.vimrc.bundles'),
               ]
 
-neovim=False
-
-def _install_github_bundle(user, package):
-    if not os.path.exists(os.path.expanduser("~/.vim/bundle/%s" % package)):
-        cmd_str = "git clone https://github.com/%s/%s.git %s/.vim/bundle/%s" % (user, package, util.get_home_path(), package)
+def _install_github_bundle(rootdir, user, package):
+    install_folder = os.path.expanduser("%s/bundle/%s" % (rootdir, package))
+    print "install github at: %s" % install_folder
+    if not os.path.exists(install_folder):
+        cmd_str = "git clone --recursive https://github.com/%s/%s.git %s" % (user, package, install_folder)
         subprocess.check_call(cmd_str.split())
+    else:
+        old_cwd = os.getcwd()
+        try:
+            os.chdir(install_folder)
+            cmd_str = "git pull"
+            subprocess.check_call(cmd_str.split())
+            cmd_str = "git submodule update --init --recursive"
+            subprocess.check_call(cmd_str.split())
+        finally:
+            os.chdir(old_cwd)
 
 
-def install(neovim=False):
+def _install():
+    try:
+        os.makedirs("dot_vim/backup")
+    except OSError as e:
+        print e
+
+    f_bundles = open("vimrc.bundles")
+    for bundle in f_bundles:
+        bundle = bundle.split()[1].strip("'")
+        github_user = bundle.split("/")[0].strip()
+        package = bundle.split("/")[1].strip()
+        _install_github_bundle("dot_vim", github_user, package)
+
     for orig, dest in LINK_FILES:
         orig = os.path.join(os.path.dirname(__file__), orig)
         dest = util.fix_home_path(dest)
         print orig, dest
         util.link_file(orig, dest)
-    _install_github_bundle("VundleVim", "Vundle.vim")
-    # Install all the plugins using vundle
-    subprocess.check_call('nvim +PluginInstall +qall'.split())
+
+
+def install():
+    old_cwd = os.getcwd()
+    try:
+        os.chdir(os.path.dirname(__file__))
+        _install()
+    finally:
+        os.chdir(old_cwd)
 
 
 def uninstall():
