@@ -1,0 +1,5 @@
+Use xrandar
+https://wiki.archlinux.org/index.php/xrandr
+
+Use mon
+https://aur.archlinux.org/packages/mons/
