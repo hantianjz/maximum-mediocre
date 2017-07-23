@@ -28,6 +28,7 @@ def _install_github_bundle(rootdir, user, package):
             subprocess.check_call(cmd_str.split())
         finally:
             os.chdir(old_cwd)
+    if package == "YouCompleteMe":
 
 
 def _install():
@@ -60,7 +61,9 @@ def install():
 
 
 def uninstall():
-    raise NotImplementedError()
+    for _, sym_link in LINK_FILES:
+        sym_link_path = util.fix_home_path(sym_link)
+        os.remove(sym_link_path)
 
 
 def verify():
