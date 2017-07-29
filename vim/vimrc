@@ -178,7 +178,8 @@ autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
 nnoremap <Leader>q :Bdelete<CR>
 
-let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,125,124,19]
+let g:semanticGUIColors = ['#000000', '#800000', '#008000', '#808000', '#000080', '#800080', '#008080', '#c0c0c0', '#808080', '#ff0000', '#00ff00', '#ffff00', '#0000ff', '#ff00ff', '#00ffff', '#ffffff']
+let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,22,23,24,25,26,27,28]
 let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java"]
 
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
