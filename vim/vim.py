@@ -28,7 +28,15 @@ def _install_github_bundle(rootdir, user, package):
             subprocess.check_call(cmd_str.split())
         finally:
             os.chdir(old_cwd)
+
     if package == "YouCompleteMe":
+        old_cwd = os.getcwd()
+        try:
+            os.chdir(install_folder)
+            cmd_str = "./install.py --clang-completer --racer-completer --system-libclang"
+            subprocess.check_call(cmd_str.split())
+        finally:
+            os.chdir(old_cwd)
 
 
 def _install():
