@@ -119,7 +119,7 @@ AFTER REBOOTING
 
 Adding a user:
 # useradd -m -s /bin/bash hjz
-# password hjz
+# passwd hjz
 # usermod -aG root hjz
 # usermod -aG adm hjz
 # usermod -aG wheel hjz
