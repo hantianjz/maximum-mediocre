@@ -29,7 +29,7 @@ set backupcopy=yes                                           " see :help crontab
 set clipboard+=unnamedplus                                    " yank and paste with the system clipboard
 set directory-=.                                             " don't store swapfiles in the current directory
 set encoding=utf-8
-set expandtab                                                " expand tabs to spaces
+"set expandtab                                                " expand tabs to spaces
 set ignorecase                                               " case-insensitive search
 set incsearch                                                " search as you type
 set laststatus=2                                             " always show statusline
@@ -189,3 +189,11 @@ set rtp+=~/.vim/bundle/fzf/
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 let g:fzf_height = 10
 let g:fzf_buffers_jump = 1
+
+" Change tabspace
+function TabSpace(count)
+    echom a:count
+    let &softtabstop=a:count
+    let &shiftwidth=a:count
+    let &tabstop=a:count
+endfunction
