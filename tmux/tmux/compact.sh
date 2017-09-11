@@ -45,6 +45,14 @@ Linux)
         tmux bind-key -t vi-copy Enter copy-pipe "xclip -in -selection clipboard"
         tmux bind-key -t vi-copy y     copy-pipe "xclip -in -selection clipboard"
     fi
+
+	if has_version 2.1; then
+		bind-key -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
+		bind-key -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
+	else
+		bind-key -t root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
+		bind-key -t root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
+	fi
     tmux bind-key ] run-shell "xclip -out -selection clipboard | tmux load-buffer - && tmux paste-buffer"
     ;;
 esac
