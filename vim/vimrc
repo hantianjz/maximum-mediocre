@@ -185,7 +185,7 @@ let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java"]
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 " FZF
-set rtp+=~/.vim/bundle/fzf/
+set rtp+=~/.fzf/
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 let g:fzf_height = 10
 let g:fzf_buffers_jump = 1
