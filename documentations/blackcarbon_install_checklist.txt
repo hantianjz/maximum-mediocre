@@ -7,7 +7,7 @@ If UEFI mode is enabled on an UEFI motherboard, Archiso will boot Arch Linux acc
 
 ### Configure wireless network
 Identify network interface via:
-# ip link 
+# ip link
 
 Enable interface:
 # ip link set wlp4s0 up
@@ -34,7 +34,7 @@ section: Encrypted boot partition (GRUB)
 |               |                |                |                |                |
 |/boot/efi      |/boot           |root            |swap            |home            |
 |               |                |                |                |                |
-|               |                |/dev/store/root |/dev/store/swap |/dev/store/home | 
+|               |                |/dev/store/root |/dev/store/swap |/dev/store/home |
 |/dev/sdaX      |/dev/sdaY       +----------------+----------------+----------------+
 |unencrypted    |LUKS encrypted  |/dev/sdaZ encrypted using LVM on LUKS             |
 +---------------+----------------+--------------------------------------------------+
@@ -188,3 +188,6 @@ i3 remove boarder
 # pacman -S adobe-source-han-sans-otc-fonts
 
 # pacman -S pulse pulseaudio-alsa libpulse alsa-plugins
+
+Enable lock screen
+# sudo systemctl enable suspend@hjz
