@@ -1,4 +1,4 @@
-import util
+from util import util
 
 import subprocess
 import re
@@ -14,9 +14,6 @@ def install():
         dest = util.fix_home_path(dest)
         util.link_file(orig, dest)
 
-    # include git alias into shell alias folder
-    util.link_file(os.path.abspath("git/gitalias.zsh"), "shell/alias/gitalias.zsh")
-    util.link_file(os.path.abspath("git/gitalias.bash"), "shell/alias/gitalias.bash")
 
 def uninstall():
     raise NotImplementedError()

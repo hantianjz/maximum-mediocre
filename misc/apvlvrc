@@ -1,0 +1,11 @@
+fullscreen=no
+content=no
+continuious=yes
+doubleclick=3
+visualmode=yes
+noinfo=no
+doubleclick=line
+wrapscan=yes
+defaultdir=~
+autoscrolldoc=no
+noinfo=yes

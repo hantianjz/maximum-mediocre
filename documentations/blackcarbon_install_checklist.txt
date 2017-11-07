@@ -178,16 +178,17 @@ INSTALL X
 # pacman -S xorg-server xorg-apps
 # pacman -S i3 rxvt-unicode dmenu
 
-add to ~/.profile
+add to ~/.zprofile or ~/.bash_profile
 " if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
 "   exec startx
 " fi
+
 
 load .xinitrc .xresource
 
 INSTALL TOOL TO BOOTSTRAP
 # pacman -S git openssh
-# ssh-keygen -t dsa
+# ssh-keygen -t rsa -b 4096
 
 FONTS
 # pacman -S ttf-dejavu
@@ -203,9 +204,15 @@ i3 remove boarder
 
 # pacman -S vlc qt4
 
-# pacman -S adobe-source-han-sans-otc-fonts
+# pacman -S adobe-source-han-sans-otc-fonts noto-fonts-emoji 
 
-# pacman -S pulse pulseaudio-alsa libpulse alsa-plugins
+# pacman -S pulse pulseaudio-alsa libpulse alsa-plugins alsa-utils
+
+# pacman -S htop 
+
+# pacman -S clang
+
+# pacman -S xf86-video-intel vulkan-intel
 
 Enable lock screen
 # sudo systemctl enable suspend@hjz
