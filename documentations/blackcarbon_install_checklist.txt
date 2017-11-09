@@ -204,15 +204,15 @@ i3 remove boarder
 
 # pacman -S vlc qt4
 
-# pacman -S adobe-source-han-sans-otc-fonts noto-fonts-emoji 
+# pacman -S adobe-source-han-sans-otc-fonts noto-fonts-emoji
 
 # pacman -S pulse pulseaudio-alsa libpulse alsa-plugins alsa-utils
 
-# pacman -S htop 
+# pacman -S htop
 
 # pacman -S clang
 
-# pacman -S xf86-video-intel vulkan-intel
+# pacman -S xf86-video-intel xf86-input-libinput vulkan-intel
 
 Enable lock screen
 # sudo systemctl enable suspend@hjz
