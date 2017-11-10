@@ -214,5 +214,25 @@ i3 remove boarder
 
 # pacman -S xf86-video-intel xf86-input-libinput vulkan-intel
 
+# pacman -S powertop tlp tp_smapi acpi_call
+# systemctl mask systemd-rfkill.service
+# systemctl mask systemd-rfkill.socket
+# systemctl enable tlp
+# systemctl enable tlp-sleep
+
+# install pacaur
+
+# Consider install the following packages
+-android-studio
+-drive
+-mons
+-skypeforlinux
+-spotify
+-xss-lock
+-yubico-yubioath-desktop
+-cower
+-pacaur
+
+
 Enable lock screen
 # sudo systemctl enable suspend@hjz
