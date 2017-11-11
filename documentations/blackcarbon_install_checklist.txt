@@ -232,6 +232,8 @@ i3 remove boarder
 -yubico-yubioath-desktop
 -cower
 -pacaur
+-siji-git
+-polybar
 
 
 Enable lock screen
