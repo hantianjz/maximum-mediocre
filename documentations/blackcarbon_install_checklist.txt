@@ -214,6 +214,10 @@ i3 remove boarder
 
 # pacman -S xf86-video-intel xf86-input-libinput vulkan-intel
 
+# pacman -S wpa_actiond
+# systemctl enable/start netctl-auto@wlps4.service
+
+
 # pacman -S powertop tlp tp_smapi acpi_call
 # systemctl mask systemd-rfkill.service
 # systemctl mask systemd-rfkill.socket
@@ -237,4 +241,4 @@ i3 remove boarder
 
 
 Enable lock screen
-# sudo systemctl enable suspend@hjz
+# sudo systemctl enable screen_lock@hjz
