@@ -23,7 +23,7 @@
 	interactive = auto
 [core]
 	excludesfile = ~/.gitignore
-	editor = vim
+	editor = nvim
 [rerere]
 	enabled = 1
 [pull]

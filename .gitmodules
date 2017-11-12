@@ -1,0 +1,6 @@
+[submodule "package/aurpackage/pacaur"]
+	path = package/aurpackage/pacaur
+	url = https://aur.archlinux.org/pacaur.git
+[submodule "package/aurpackage/cower"]
+	path = package/aurpackage/cower
+	url = https://aur.archlinux.org/cower.git

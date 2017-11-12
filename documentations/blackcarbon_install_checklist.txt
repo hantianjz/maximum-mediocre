@@ -42,7 +42,7 @@ section: Encrypted boot partition (GRUB)
 Number  Start (sector)    End (sector)  Size       Code  Name
    1            2048         1050623   512.0 MiB   EF00  EFI System
    2         1050624         1460223   200.0 MiB   8300  Linux filesystem
-   3         1460224        41943006   19.3 GiB    8E00  Linux LVM
+   3         1460224        41943006   xxx.0 GiB   8E00  Linux LVM (xxx approximate size of drive)
 
 # fdisk /dev/nvme0n1
 Create 3 partition according the 3 listed
@@ -56,14 +56,21 @@ Preparing the logical volumes
 # vgcreate CarbonVol /dev/mapper/lvm
 
 # lvcreate -L 20G CarbonVol -n root
-# lvcreate -l 100%FREE CarbonVol -n home
+# lvcreate -L 100G CarbonVol -n home
+# lvcreate -l 100%FREE CarbonVol -n data
+
+# mkfs.ext4 /dev/mapper/CarbonVol-root
+# mkfs.ext4 /dev/mapper/CarbonVol-home
+# mkfs.ext4 /dev/mapper/CarbonVol-data
 
 # mount /dev/mapper/CarbonVol-root /mnt
 # mkdir /mnt/home
 # mount /dev/mapper/CarbonVol-home /mnt/home
+# mkdir /mnt/data
+# mount /dev/mapper/CarbonVol-data /mnt/data
 
 Preparing the boot partition
-# cryptnvme0n1p2setup luksFormat /dev/nvme0n1p2
+# cryptsetup luksFormat /dev/nvme0n1p2
 # cryptsetup open /dev/nvme0n1p2 boot
 # mkfs.ext2 /dev/mapper/boot
 # mkdir /mnt/boot
@@ -73,27 +80,48 @@ Preparing the boot partition
 # mkdir /mnt/boot/efi
 # mount /dev/nvme0n1p1 /mnt/boot/efi
 
+
+# pacstrap /mnt base
+
+# genfstab -U /mnt >> /mnt/etc/fstab
+
+# arch-chroot /mnt
+
 To avoid the double entry for unlocking  /boot, follow the instructions at Dm-crypt/Device encryption#Keyfiles to:
 1. Create a randomtext keyfile,
-# dd bs=512 count=4 if=/dev/urandom of=/etc/bootkeyfile
-
+# dd bs=512 count=4 if=/dev/urandom of=/etc/crypto_keyfile.bin
 2. Setup proper permission
-# chmod 000 /crypto_keyfile.bin
-# chmod 600 /boot/initramfs-linux*
+# chmod 000 /etc/crypto_keyfile.bin
+3. Add the keyfile to the (/dev/nvme0n1p2) boot partition's LUKS header and
+# cryptsetup luksAddKey /dev/nvme0n1p2 /etc/crypto_keyfile.bin
+4. Add the /etc/crypttab line to unlock it automatically at boot.
+# boot /dev/nvme0n1p2	/etc/crypto_keyfile.bin luks
 
-3. Add the keyfile to the (/dev/sdaY) boot partition's LUKS header and
-# cryptsetup luksAddKey /dev/sdX# /crypto_keyfile.bin
+Update region and time
+# ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+# hwclock --systohc
 
-4. Check the /etc/fstab entry and add the /etc/crypttab line to unlock it automatically at boot.
+Locale:
+# locale-gen
+Create file: __ /etc/locale.conf __ with:
+```
+LANG=en_US.UTF-8
+```
 
-START INSTALLTION PROCRESS
+Hostname:
+Create file: __ /etc/hostname __ with:
+_myhostname_
 
-BEFORE RESUMING:
+Addd line to __ /etc/hosts __:
+```
+127.0.1.1	myhostname.localdomain	myhostname
+```
+
 # pacman -S base-devel
 # pacman -S grub
 # pacman -S efibootmgr
 # pacman -S neovim
-# pacman -S wpa_supplicant dhcpd
+# pacman -S wpa_supplicant dhcpcd dialog
 
 Configuring mkinitcpio
 # vim /etc/mkinitcpio.conf
@@ -105,17 +133,16 @@ HOOKS="... keyboard block encrypt lvm2 ... filesystems ..."
 Configuring the boot loader
 # vim /etc/default/grub
 ----------------------------------------------------------------
-GRUB_CMDLINE_LINUX="... cryptdevice=UUID=959463b9-c6c8-43d7-8dbc-0c5067817943:lvm ..."
+GRUB_CMDLINE_LINUX="... cryptdevice=UUID=6de42073-116c-43a5-82a2-e913d0c111f8:lvm ..."
 GRUB_ENABLE_CRYPTODISK=y
 ----------------------------------------------------------------
+( UUID=<of root file system>:</dev/mapper/ volume name> )
 
 Install new initramfs
 # mkinitcpio -p linux
 
 # grub-mkconfig -o /boot/grub/grub.cfg
 # grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck
-
-AFTER REBOOTING
 
 Adding a user:
 # useradd -m -s /bin/bash hjz
@@ -126,53 +153,45 @@ Adding a user:
 # usermod -aG ftp hjz
 # usermod -aG uucp hjz
 # usermod -aG log hjz
-# usermod -aG rfill hjz
+# usermod -aG rfkill hjz
 # usermod -aG systemd-journal hjz
 
 Setup sudo
 # pacman -S sudo
 # visudo    (uncomment WHEEL PASSWORDLESS)
 
+REBOOT SYSTEM!!!
+
+Verify hjz have sudo permission
+
 Disable root login
 # sudo passwd -l root
 
 Setup wifi-profile
-# pacman -S dialog
 # wifi-menu
-
-# netcl enable "wlp4s0-221b_baker_st 5GHz"
+# netcl enable "wlp4s0-221b_baker_st"
 
 Update packages
 # pacman -Syu
 
 INSTALL X
-# pacman -S xorg-server xorg-apps xorg-init
+# pacman -S xorg-server xorg-apps
 # pacman -S i3 rxvt-unicode dmenu
 
-add to ~/.profile
+add to ~/.zprofile or ~/.bash_profile
 " if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
 "   exec startx
 " fi
 
-Change i3 font to Dajavu 9
 
-add to ~/.xinitrc
-" setxkbmap -option ctrl:nocaps
-" exec i3 -V >> ~/.i3/i3log 2>&1
+load .xinitrc .xresource
 
 INSTALL TOOL TO BOOTSTRAP
 # pacman -S git openssh
-# ssh-keygen -t dsa
-
-INSTALL GOOGLE-CHROME
-# mkdir aurpackage
-# git clone https://aur.archlinux.org/google-chrome.git
-# makepkg -si   (Install)
-# makepkg -rc   (clean up)
+# ssh-keygen -t rsa -b 4096
 
 FONTS
 # pacman -S ttf-dejavu
-
 
 setup yubikey
 https://wiki.archlinux.org/index.php/yubikey
@@ -185,9 +204,41 @@ i3 remove boarder
 
 # pacman -S vlc qt4
 
-# pacman -S adobe-source-han-sans-otc-fonts
+# pacman -S adobe-source-han-sans-otc-fonts noto-fonts-emoji
 
-# pacman -S pulse pulseaudio-alsa libpulse alsa-plugins
+# pacman -S pulse pulseaudio-alsa libpulse alsa-plugins alsa-utils
+
+# pacman -S htop
+
+# pacman -S clang
+
+# pacman -S xf86-video-intel xf86-input-libinput vulkan-intel
+
+# pacman -S wpa_actiond
+# systemctl enable/start netctl-auto@wlps4.service
+
+
+# pacman -S powertop tlp tp_smapi acpi_call
+# systemctl mask systemd-rfkill.service
+# systemctl mask systemd-rfkill.socket
+# systemctl enable tlp
+# systemctl enable tlp-sleep
+
+# install pacaur
+
+# Consider install the following packages
+-android-studio
+-drive
+-mons
+-skypeforlinux
+-spotify
+-xss-lock
+-yubico-yubioath-desktop
+-cower
+-pacaur
+-siji-git
+-polybar
+
 
 Enable lock screen
-# sudo systemctl enable suspend@hjz
+# sudo systemctl enable screen_lock@hjz

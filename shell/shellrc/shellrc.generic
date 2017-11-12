@@ -5,6 +5,8 @@ fi
 
 source ${CURR_FILE_DIR}/shell_helper
 
+source ${CURR_FILE_DIR}/shellrc.ssh.generic
+
 export PATH=$PATH:~/bin
 
 if [ `uname` = "Linux" ]; then
