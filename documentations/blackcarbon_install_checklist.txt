@@ -234,11 +234,15 @@ i3 remove boarder
 -spotify
 -xss-lock
 -yubico-yubioath-desktop
+-pcsclite 
+-pcsc-tools
 -cower
 -pacaur
 -siji-git
 -polybar
 
+Enable Yubikey
+# systemctl start/enable pcscd
 
 Enable lock screen
 # sudo systemctl enable screen_lock@hjz
