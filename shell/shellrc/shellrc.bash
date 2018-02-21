@@ -12,3 +12,7 @@ alias cd=pushd
 
 source ${CURR_FILE_DIR}/shellrc.generic
 unset CURR_FILE_DIR
+
+if exist tmuxinator; then
+	source ${CURR_FILE_DIR}/tmuxinator.bash
+fi
