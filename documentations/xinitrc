@@ -1,0 +1,8 @@
+xset b off
+setxkbmap -option ctrl:nocaps
+xrdb -merge ~/.Xresources
+xset -dpms s off
+
+killall xss-lock; /usr/bin/xss-lock -- /usr/bin/i3lock -e -f -c 000000 &
+
+exec i3 -V >> ~/.i3log 2>&1
