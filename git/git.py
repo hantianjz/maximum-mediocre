@@ -5,7 +5,8 @@ import re
 
 import os
 
-LINK_FILES = [('gitconfig',        '~/.gitconfig')]
+LINK_FILES = [('gitconfig',        '~/.gitconfig'),
+            ('gitignore',        '~/.gitignore')]
 GIT_EXECUTABLE_STR = "git"
 
 def install():
