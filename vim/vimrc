@@ -144,7 +144,8 @@ if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 
-colorscheme mirodark
+" colorscheme mirodark
+colorscheme duoduo
 
 set cursorline
 set cursorcolumn
@@ -178,11 +179,28 @@ autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
 nnoremap <Leader>q :Bdelete<CR>
 
-let g:semanticGUIColors = ['#000000', '#800000', '#008000', '#808000', '#000080', '#800080', '#008080', '#c0c0c0', '#808080', '#ff0000', '#00ff00', '#ffff00', '#0000ff', '#ff00ff', '#00ffff', '#ffffff']
-let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,22,23,24,25,26,27,28]
+let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
 let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java"]
 
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'vim' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'mail' : 1,
+      \ 'gitcommit' : 1,
+      \ 'make' : 1,
+      \ 'conf' : 1,
+      \ 'sh' : 1
+      \}
+
+" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 " FZF
@@ -198,3 +216,5 @@ function TabSpace(count)
     let &shiftwidth=a:count
     let &tabstop=a:count
 endfunction
+
+let g:gutentags_generate_on_write=0
