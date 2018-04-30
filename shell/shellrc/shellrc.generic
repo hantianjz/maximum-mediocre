@@ -5,7 +5,9 @@ fi
 
 source ${CURR_FILE_DIR}/shell_helper
 
+if [ -z "~/.ssh" ]; then
 source ${CURR_FILE_DIR}/shellrc.ssh.generic
+fi
 
 export PATH=$PATH:~/bin
 
