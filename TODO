@@ -8,3 +8,12 @@ zsh
 cmake
 vim post-install
 install pip neovim for ycm support
+
+ubuntu linux:
+Need to install:
+- build-essential
+- python-dev
+- clang
+
+files to touch if not exist:
+.zshrc.local
