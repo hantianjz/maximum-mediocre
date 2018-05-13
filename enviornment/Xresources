@@ -51,7 +51,7 @@ URxvt.mouseWheelScrollPage: true
 
 
 ! Perl extensions
-URxvt.perl-ext-common:      default,resize-font
+URxvt.perl-ext-common:      default,resize-font,confirm-paste
 ! URxvt.matcher.button:       1
 ! URxvt.urlLauncher:          google-chrome
 
