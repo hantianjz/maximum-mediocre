@@ -144,7 +144,6 @@ if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 
-" colorscheme mirodark
 colorscheme duoduo
 
 set cursorline
@@ -179,7 +178,7 @@ autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
 nnoremap <Leader>q :Bdelete<CR>
 
-let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20,21]
 let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java"]
 
 let g:ycm_filetype_blacklist = {
@@ -218,3 +217,5 @@ function TabSpace(count)
 endfunction
 
 let g:gutentags_generate_on_write=0
+
+let g:airline_theme='base16_bright'
