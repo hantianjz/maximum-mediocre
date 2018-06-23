@@ -2,3 +2,5 @@ tags
 tags.lock
 tags.temp
 .ycm_extra_conf.py
+.gdbinit
+.gdbhistory
