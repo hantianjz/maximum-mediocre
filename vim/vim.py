@@ -14,7 +14,7 @@ LINK_FILES = [('dot_vim',          '~/.vim'),
 
 def _install_github_bundle(rootdir, user, package):
     install_folder = os.path.expanduser("%s/bundle/%s" % (rootdir, package))
-    print "install github at: %s" % install_folder
+    print("install github at: %s" % install_folder)
     if not os.path.exists(install_folder):
         cmd_str = "git clone --recursive https://github.com/%s/%s.git %s" % (user, package, install_folder)
         subprocess.check_call(cmd_str.split())
@@ -43,7 +43,7 @@ def _install():
     try:
         os.makedirs("dot_vim/backup")
     except OSError as e:
-        print e
+        print(e)
 
     f_bundles = open("vimrc.bundles")
     for bundle in f_bundles:
@@ -55,7 +55,7 @@ def _install():
     for orig, dest in LINK_FILES:
         orig = os.path.join(os.path.dirname(__file__), orig)
         dest = util.fix_home_path(dest)
-        print orig, dest
+        print(orig, dest)
         util.link_file(orig, dest)
 
 

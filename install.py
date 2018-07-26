@@ -47,7 +47,7 @@ def main():
                 if module.checkdeps():
                     module.install()
         except NotImplementedError as e:
-            print "module: %s exception: %s " % (repr(module), e)
+            print("module: %s exception: %s " % (repr(module), e))
 
 
 if __name__ == "__main__":

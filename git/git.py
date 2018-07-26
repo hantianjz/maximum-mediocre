@@ -32,18 +32,20 @@ def checkdeps():
     try:
         subprocess.check_call("which %s" % GIT_EXECUTABLE_STR, shell=True)
     except subprocess.CalledProcessError as e:
-        print "%s not found" % GIT_EXECUTABLE_STR
+        print("%s not found" % GIT_EXECUTABLE_STR)
         return False
 
     try:
         version_str = subprocess.check_output("%s --version" % GIT_EXECUTABLE_STR, shell=True)
+        version_str = version_str.decode("utf-8")
+        print("GIT_VERSION == %s" % version_str)
     except subprocess.CalledProcessError as e:
-        print "%s failed to fetch version!" % GIT_EXECUTABLE_STR
+        print("%s failed to fetch version!" % GIT_EXECUTABLE_STR)
         return False
 
     # extract the version details
     version = re.match("git version (?P<major>\d+).(?P<minor>\d+).(?P<patch>\d+)", version_str)
-    print "git version %s" % repr(version.groupdict())
+    print("git version %s" % repr(version.groupdict()))
 
     return True
 

@@ -8,7 +8,7 @@ LINK_FILES = [('tmux.conf',        '~/.tmux.conf'),
 
 def _install_tpm(rootdir, user, package):
     install_folder = os.path.expanduser("%s/plugins/%s" % (rootdir, package))
-    print "install github at: %s" % install_folder
+    print("install github at: %s" % install_folder)
     if not os.path.exists(install_folder):
         cmd_str = "git clone --recursive https://github.com/%s/%s.git %s" % (user, package, install_folder)
         subprocess.check_call(cmd_str.split())

@@ -19,13 +19,13 @@ def get_current_brightness():
 
 
 def get_new_brightness(max_bl, current_bl, diff_percent):
-    # print "current_bl: %d" % current_bl
-    # print "max_bl: %d" % max_bl
-    # print "diff: %d" % diff_percent
+    # print("current_bl: %d" % current_bl)
+    # print("max_bl: %d" % max_bl)
+    # print("diff: %d" % diff_percent)
     diff_bl = max_bl * (diff_percent/100.0)
-    # print "diff bl: %d" % diff_bl
+    # print("diff bl: %d" % diff_bl)
     new_bl = current_bl + diff_bl
-    print "new bl: %d" % new_bl
+    print("new bl: %d" % new_bl)
     if new_bl <= 0:
         return 1
     elif new_bl > max_bl:

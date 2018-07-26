@@ -13,7 +13,7 @@ class Aptitude(package_manager.PackagerManager):
         raise NotImplementedError()
 
     def install(package):
-        print util.run_cmd("%s install %s" % (self.CMD_STR, package))
+        print(util.run_cmd("%s install %s" % (self.CMD_STR, package)))
 
     def remove(package):
         raise NotImplementedError()

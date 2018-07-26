@@ -87,7 +87,7 @@ def GenerateDatabases(riker_folder, file):
     for dir in os.listdir(BUILD_DIR):
         database = DatabaseForBuildConfig(BUILD_DIR, dir)
         if database:
-            print "Generate db for: %s" % dir
+            print("Generate db for: %s" % dir)
             DATABASES[riker_folder][dir] = database
 
 
@@ -134,7 +134,7 @@ def FindDatabseAndCompilationInfo(filename):
         if key in filename and value in DATABASES[riker_folder]:
             compilation_info = DATABASES[riker_folder][value].GetCompilationInfoForFile(filename)
             if compilation_info.compiler_flags_:
-                print "Found: key %s; value %s" % (key, value)
+                print("Found: key %s; value %s" % (key, value))
                 return compilation_info
 
     for key, database in DATABASES[riker_folder].iteritems():

@@ -17,7 +17,7 @@ def link_file(orig, dest):
     except Exception:
         pass
     os.symlink(orig, dest)
-    # print "symlinked %s -> %s" % (orig, dest)
+    # print("symlinked %s -> %s" % (orig, dest))
 
 
 def str_exist_in_file(filename, string):
