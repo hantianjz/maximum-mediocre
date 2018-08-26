@@ -21,9 +21,11 @@
 	status = auto
 	branch = auto
 	interactive = auto
+	ui = true
 [core]
 	excludesfile = ~/.gitignore
 	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [rerere]
 	enabled = 1
 [pull]
@@ -40,3 +42,15 @@
 	diff = diff-highlight | less
 [interactive]
 	diffFilter = diff-highlight
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
