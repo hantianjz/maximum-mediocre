@@ -37,3 +37,10 @@ fi
 if exist nvim; then
     alias vim=nvim
 fi
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+export FZF_TMUX_HEIGHT=15
+export TERM=xterm
+export COLORTERM=xterm-256color
