@@ -1,48 +1,39 @@
-This is my personal work enviornment installer/swiss army knife.
-Original insperation came from [maximum-awesome](https://github.com/square/maximum-awesome) but implemented in Python instead of Ruby.
+This is my personal work environment installer/swiss army knife.
+Original insperation came from [maximum-awesome](https://github.com/square/maximum-awesome) but implemented in Python3 instead of Ruby.
 
 # Features:
-- features can be explictly turned on/off
-- single install setup.sh script, persisting features across sessions
-- dependency checking, version enforcement
+- features can be individually installed
+- Support newest version of most packages, NOT backward compatible.
 - Support terminal type: bash, zsh
-- Support os: OS X, Gentoo (all linux distro type, or generic package manager)
-- Configuration parameter: feature packages, whoami, mach, variant
+- Support os: OS X, Gentoo (all linux distro type, or generic package manager), NEVER WINDOWS.
 
-# Terminal:
+# Shell:
 - git aliass
 - gitconfig
 - tmux settings
-
-# Terminal+:
-- seacher
-- fzf, control-r
+- git
+- fzf
 - zsh
+- zprezto
+
+# External packages:
 - cmake
 - ninja
+- ripgprep
 
-# Viming:
-- simple version of vimrc, without any pluggins
+# Vim:
+- neovim
+- vimrc
+- vim pluggins
 
-# Viming+:
-- full setup
-
-# Java Dev:
+# Python Dev:
+- TODO
 
 # AOSP Dev:
+- TODO
 
 # Embedded Dev:
+- TODO
 
-# Rust Dev:
-
-# Security:
-- pass
-- gpg keys
-- sshkey (generate and push to where ever)
-
-# Machine specific setups:
-- OS X:
-    - Maybe need this.
-- Archlinux
-- Ubuntu
-
+# Kernel Dev:
+- TODO
