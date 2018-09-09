@@ -1,6 +1,5 @@
 [user]
 	name = James Zhao
-	email = jamzhao@gmail.com
 [push]
 	config = default
 	default = current
