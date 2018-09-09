@@ -7,10 +7,11 @@ fi
 CURR_FILE_DIR="$(cd "$(dirname "${CURR_FILE}" )" && pwd )"
 #*****************CURR_FILE_DIR*****************
 
-source ${CURR_FILE_DIR}/shellrc.generic
-
-if exist tmuxinator; then
-	source ${CURR_FILE_DIR}/tmuxinator.zsh
-fi
+source ${CURR_FILE_DIR}/shellrc.zsh
+source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc
 
 unset CURR_FILE_DIR
+
+if [ -e ~/.zshrc.local ]; then
+	source ~/.zshrc.local
+fi

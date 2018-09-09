@@ -1,3 +1,0 @@
-#!/bin/bash
-
-ctags --fields=+l --langmap=c:.h.c -R . --links=no

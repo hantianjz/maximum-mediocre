@@ -5,68 +5,72 @@ import subprocess
 
 from util import util
 
-class ShellRC(object):
 
-    def __init__(self, shell):
-        self.shell = shell
+LINK_FILES = [
+        # GIT
+        ('gitconfig',         '~/.gitconfig'),
+        ('gitignore',         '~/.gitignore'),
 
-        # Get absolute path of the shellrc file
-        self.rc_file = os.path.join(
-                os.path.dirname(os.path.realpath(__file__)),
-                "shellrc",
-                "shellrc.%s" % shell)
+        # ZSH
+        ('zlogin',            '~/.zlogin'),
+        ('zlogout',           '~/.zlogout'),
+        ('zpreztorc',         '~/.zpreztorc'),
+        ('zprofile',          '~/.zprofile'),
+        ('zshenv',            '~/.zshenv'),
+        ('zshrc',             '~/.zshrc'),
 
-        # The souce line to *rc files
-        self.source_str = "source %s" % self.rc_file
+        # BASH
+        ('profile',           '~/.profile'),
+        ('bashrc',            '~/.bashrc'),
+        ]
 
-        # Get absolute path of the target shell rc file
-        self.target_rc_file = os.path.join(util.get_home_path(), ".%src" % shell)
-
-
-    """ Include shellrc.* to corresponding rc file """
-    def install(self):
-        if not os.path.isfile(self.rc_file):
-            print("%s not a file or does not exist, skipping setup for _%s_" % (self.rc_file, shell))
-            return
-
-        # Add souce line to *rc files
-        if os.path.exists(self.target_rc_file):
-            print("target shell rc file %s exist" % self.target_rc_file)
-
-            # TODO: more intelligent search and append/replace
-            if not util.str_exist_in_file(self.target_rc_file, self.source_str):
-                print("Append line \"%s\"" % self.source_str)
-                util.append_str_into_file(self.target_rc_file, self.source_str)
-            else:
-                print("Already exist line \"%s\"" % self.source_str)
-        else:
-            print("%s does not exist, creating!" % self.target_rc_file)
-            util.append_str_into_file(self.target_rc_file, self.source_str)
+PACKAGES = [
+        ('https://github.com/oahzjh/prezto.git', '~/.zprezto', None),
+        ('https://github.com/junegunn/fzf.git', '~/.fzf/', '~/.fzf/install')]
 
 
-    def uninstall(self):
-        if os.path.exists(self.target_rc_file):
-            print("target shell rc file %s exist" % self.target_rc_file)
-            if util.str_exist_in_file(self.target_rc_file, self.source_str):
-                print("Removing line \"%s\"" % self.source_str)
-                util.remove_str_into_file(self.target_rc_file, self.source_str)
+def _download_git_repo(git_url, install_folder, install_script):
+    print("install github at: %s" % install_folder)
+    if not os.path.exists(install_folder):
+        cmd_str = "git clone --depth 1 --recursive %s %s" % (git_url, install_folder)
+        subprocess.check_call(cmd_str.split())
+    else:
+        old_cwd = os.getcwd()
+        try:
+            os.chdir(install_folder)
+            cmd_str = "git pull"
+            subprocess.check_call(cmd_str.split())
+            cmd_str = "git submodule update --init --recursive"
+            subprocess.check_call(cmd_str.split())
+        finally:
+            os.chdir(old_cwd)
 
-    def get_shell_path(self):
-        return "something random"
-
-
-SHELLRCS = [ShellRC("bash"), ShellRC("zsh")]
+    if install_script:
+        old_cwd = os.getcwd()
+        try:
+            os.chdir(install_folder)
+            subprocess.check_call(install_script.split())
+        finally:
+            os.chdir(old_cwd)
 
 
 def install():
-    for shell in SHELLRCS:
-        if shell.get_shell_path():
-            shell.install()
+    # Make symlink to files
+    for orig, dest in LINK_FILES:
+        orig = os.path.join(os.path.dirname(__file__), "shellrc", orig)
+        dest = util.fix_home_path(dest)
+        util.link_file(orig, dest)
+
+    # Download git repo to destination location
+    for git_url, install_folder, install_script in PACKAGES:
+        install_folder = os.path.abspath(util.fix_home_path(install_folder));
+        if install_script:
+            install_script = os.path.abspath(util.fix_home_path(install_script));
+        _download_git_repo(git_url, install_folder, install_script)
 
 
 def uninstall():
-    for shell in SHELLRCS:
-        shell.uninstall()
+    raise NotImplementedError()
 
 
 def verify():
@@ -78,9 +82,7 @@ def dryrun():
 
 
 def checkdeps():
-    for shell in SHELLRCS:
-        print("Current shell: %s" % shell.get_shell_path())
-        return True if shell.get_shell_path() else False
+    return True
 
 
 __all__ = ['install', 'uninstall', 'verify', 'dryrun', 'checkdeps']

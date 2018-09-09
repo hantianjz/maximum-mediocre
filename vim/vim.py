@@ -16,7 +16,7 @@ def _install_github_bundle(rootdir, user, package):
     install_folder = os.path.expanduser("%s/bundle/%s" % (rootdir, package))
     print("install github at: %s" % install_folder)
     if not os.path.exists(install_folder):
-        cmd_str = "git clone --recursive https://github.com/%s/%s.git %s" % (user, package, install_folder)
+        cmd_str = "git clone --depth 1 --recursive https://github.com/%s/%s.git %s" % (user, package, install_folder)
         subprocess.check_call(cmd_str.split())
     else:
         old_cwd = os.getcwd()

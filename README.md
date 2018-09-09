@@ -1,5 +1,9 @@
 This is my personal work environment installer/swiss army knife.
-Original insperation came from [maximum-awesome](https://github.com/square/maximum-awesome) but implemented in Python3 instead of Ruby.
+Original inspiration came from [maximum-awesome](https://github.com/square/maximum-awesome) but implemented in Python3 instead of Ruby.
+
+# Prerequisites
+- Python3
+- git (To obtain this package)
 
 # Features:
 - features can be individually installed
@@ -8,7 +12,7 @@ Original insperation came from [maximum-awesome](https://github.com/square/maxim
 - Support os: OS X, Gentoo (all linux distro type, or generic package manager), NEVER WINDOWS.
 
 # Shell:
-- git aliass
+- git alias
 - gitconfig
 - tmux settings
 - git
