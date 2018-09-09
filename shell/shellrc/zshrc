@@ -1,3 +1,5 @@
+source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc
+
 #*****************CURR_FILE_DIR*****************
 # Get directory of current script file, follow symlink if needed.
 CURR_FILE="${(%):-%N}"
@@ -6,12 +8,11 @@ if [ -L ${CURR_FILE} ]; then
 fi
 CURR_FILE_DIR="$(cd "$(dirname "${CURR_FILE}" )" && pwd )"
 #*****************CURR_FILE_DIR*****************
-
 source ${CURR_FILE_DIR}/shellrc.zsh
-source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc
-
 unset CURR_FILE_DIR
 
 if [ -e ~/.zshrc.local ]; then
 	source ~/.zshrc.local
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
