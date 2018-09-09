@@ -23,7 +23,7 @@ source ${CURR_FILE_DIR}/default.alias
 
 if exist tmux; then
     new-tmux-from-dir-name () {
-        tmux new-session -As $(basename $PWD)
+        tmux -2 new-session -As $(basename $PWD)
     }
 
     alias tmn="new-tmux-from-dir-name"
