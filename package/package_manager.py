@@ -1,18 +1,28 @@
+import disutils
+
+
 class PackageManager(object):
-    def __init__():
+
+    PACKAGE_MANAGER_CMD_STR = None
+
+    def __init__(self):
+        if not self.PACKAGE_MANAGER_CMD_STR or not disutils.spawn.find_executable(
+                self.PACKAGE_MANAGER_CMD_STR):
+            raise NotImplementedError(
+                "PackageManager \"{}\" Does not exist".format(
+                    self.PACKAGE_MANAGER_CMD_STR))
+
+    def exist(self, package):
         raise NotImplementedError()
 
-    def exist(package):
+    def install(self, package):
         raise NotImplementedError()
 
-    def install(package):
+    def remove(self, package):
         raise NotImplementedError()
 
-    def remove(package):
+    def update(self):
         raise NotImplementedError()
 
-    def update():
-        raise NotImplementedError()
-
-    def upgrade():
+    def upgrade(self):
         raise NotImplementedError()

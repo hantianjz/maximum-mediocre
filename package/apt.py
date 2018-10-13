@@ -3,9 +3,9 @@ import package_manager
 import util
 
 
-class Aptitude(package_manager.PackagerManager):
+class Apt(package_manager.PackagerManager):
 
-    CMD_STR = "aptitude"
+    CMD_STR = "apt-get"
 
     def __init__():
         raise NotImplementedError()
@@ -14,7 +14,7 @@ class Aptitude(package_manager.PackagerManager):
         raise NotImplementedError()
 
     def install(package):
-        print(util.run_cmd("%s install %s" % (self.CMD_STR, package)))
+        raise NotImplementedError()
 
     def remove(package):
         raise NotImplementedError()
