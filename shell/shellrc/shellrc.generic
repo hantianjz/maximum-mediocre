@@ -22,11 +22,16 @@ fi
 source ${CURR_FILE_DIR}/default.alias
 
 if exist tmux; then
+    tmux-from-session-name () {
+        tmux -2 new-session -As ${1}
+    }
+
     new-tmux-from-dir-name () {
-        tmux -2 new-session -As $(basename $PWD)
+        tmux-from-session-name $(basename $PWD)
     }
 
     alias tmn="new-tmux-from-dir-name"
+    alias tma='tmux-from-session-name'
     alias tml='tmux list-sessions'
 fi
 
