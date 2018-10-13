@@ -1,6 +1,4 @@
-
 class PackageManager(object):
-
     def __init__():
         raise NotImplementedError()
 

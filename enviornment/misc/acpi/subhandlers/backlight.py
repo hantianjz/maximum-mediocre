@@ -5,7 +5,7 @@ import os
 
 import argparse
 
-BL_SYSFS_BASE="/sys/class/backlight/intel_backlight/"
+BL_SYSFS_BASE = "/sys/class/backlight/intel_backlight/"
 
 
 def get_max_brightness():
@@ -22,7 +22,7 @@ def get_new_brightness(max_bl, current_bl, diff_percent):
     # print("current_bl: %d" % current_bl)
     # print("max_bl: %d" % max_bl)
     # print("diff: %d" % diff_percent)
-    diff_bl = max_bl * (diff_percent/100.0)
+    diff_bl = max_bl * (diff_percent / 100.0)
     # print("diff bl: %d" % diff_bl)
     new_bl = current_bl + diff_bl
     print("new bl: %d" % new_bl)
@@ -54,6 +54,7 @@ def main():
         new_bl = get_new_brightness(max_bl, new_bl, args.up)
 
     write_new_brightness(new_bl)
+
 
 if __name__ == "__main__":
     sys.exit(main())

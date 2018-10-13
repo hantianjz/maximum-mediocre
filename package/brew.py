@@ -2,7 +2,6 @@ import package_manager
 
 
 class Brew(package_manager.PackagerManager):
-
     def __init__():
         raise NotImplementedError()
 

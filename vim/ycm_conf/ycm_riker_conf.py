@@ -5,45 +5,26 @@ import ycm_core
 COMPILATION_DATABASE_FILE = "compile_commands.json"
 
 BASE_FLAGS = [
-        '-Wall',
-        '-Wextra',
-        '-Werror',
-        '-Wno-long-long',
-        '-Wno-variadic-macros',
-        '-fexceptions',
-        '-ferror-limit=10000',
-        '-DNDEBUG',
-        '-std=c++11',
-        '-xc++',
-        '-I/usr/lib/',
-        '-I/usr/include/'
-        ]
+    '-Wall', '-Wextra', '-Werror', '-Wno-long-long', '-Wno-variadic-macros',
+    '-fexceptions', '-ferror-limit=10000', '-DNDEBUG', '-std=c++11', '-xc++',
+    '-I/usr/lib/', '-I/usr/include/'
+]
 
-KEYWORD_MAP = {"reader" : "r12-firmware",
-               "generic": "r12-firmware",
-               "MK21FA12WS": "r12-firmware",
-               "r12"    : "r12-firmware",
-               "r12c"   : "r12c-firmware-cpu1",
-               "k450"   : "r12c-firmware-cpu1",
-               "r6"     : "r6-firmware",
-               "x2"     : "x2-firmware",
-               "twr"    : "twr-k21f-firmware"}
+KEYWORD_MAP = {
+    "reader": "r12-firmware",
+    "generic": "r12-firmware",
+    "MK21FA12WS": "r12-firmware",
+    "r12": "r12-firmware",
+    "r12c": "r12c-firmware-cpu1",
+    "k450": "r12c-firmware-cpu1",
+    "r6": "r6-firmware",
+    "x2": "x2-firmware",
+    "twr": "twr-k21f-firmware"
+}
 
-SOURCE_EXTENSIONS = [
-        '.cpp',
-        '.cxx',
-        '.cc',
-        '.c',
-        '.m',
-        '.mm'
-        ]
+SOURCE_EXTENSIONS = ['.cpp', '.cxx', '.cc', '.c', '.m', '.mm']
 
-HEADER_EXTENSIONS = [
-        '.h',
-        '.hxx',
-        '.hpp',
-        '.hh'
-        ]
+HEADER_EXTENSIONS = ['.h', '.hxx', '.hpp', '.hh']
 
 # Dictionary of dictionary of compilation_db
 DATABASES = {}
@@ -132,7 +113,8 @@ def FindDatabseAndCompilationInfo(filename):
 
     for key, value in KEYWORD_MAP.iteritems():
         if key in filename and value in DATABASES[riker_folder]:
-            compilation_info = DATABASES[riker_folder][value].GetCompilationInfoForFile(filename)
+            compilation_info = DATABASES[riker_folder][
+                value].GetCompilationInfoForFile(filename)
             if compilation_info.compiler_flags_:
                 print("Found: key %s; value %s" % (key, value))
                 return compilation_info
@@ -155,7 +137,8 @@ def GetCompilationInfoForFile(filename):
         for extension in SOURCE_EXTENSIONS:
             replacement_file = basename + extension
             if os.path.exists(replacement_file):
-                compilation_info = FindDatabseAndCompilationInfo(replacement_file)
+                compilation_info = FindDatabseAndCompilationInfo(
+                    replacement_file)
                 if compilation_info.compiler_flags_:
                     return compilation_info
             return None
@@ -171,8 +154,9 @@ def FlagsForFile(filename, **kwargs):
         if not compilation_info:
             raise MissingDatabase
 
-        final_flags = MakeRelativePathsInFlagsAbsolute(compilation_info.compiler_flags_,
-                                                       compilation_info.compiler_working_dir_)
+        final_flags = MakeRelativePathsInFlagsAbsolute(
+            compilation_info.compiler_flags_,
+            compilation_info.compiler_working_dir_)
 
         # NOTE: This is just for YouCompleteMe; it's highly likely that your project
         # does NOT need to remove the stdlib flag. DO NOT USE THIS IN YOUR
@@ -182,13 +166,9 @@ def FlagsForFile(filename, **kwargs):
         except ValueError:
             pass
     except MissingDatabase:
-        return {'flags': BASE_FLAGS,
-                'do_cache': False
-                }
+        return {'flags': BASE_FLAGS, 'do_cache': False}
 
-    return {'flags': final_flags,
-            'do_cache': True
-            }
+    return {'flags': final_flags, 'do_cache': True}
 
 
 def IsRiker(filename):

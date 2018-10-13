@@ -16,7 +16,8 @@ def get_args():
     parser.add_argument("--dryrun", action="store_true", default=False)
     parser.add_argument("--checkdeps", action="store_true", default=False)
     for module in MODULE_LIST:
-        parser.add_argument("--%s" % module, action="store_true", default=False)
+        parser.add_argument(
+            "--%s" % module, action="store_true", default=False)
     return parser.parse_args()
 
 
@@ -25,7 +26,9 @@ def import_modules(args):
     for module in MODULE_LIST:
         attr = getattr(args, module)
         if attr or args.all:
-            imported_modules.append(importlib.import_module("..%s" % module, "%s.%s" % (module, module)))
+            imported_modules.append(
+                importlib.import_module("..%s" % module,
+                                        "%s.%s" % (module, module)))
 
     return imported_modules
 

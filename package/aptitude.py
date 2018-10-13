@@ -2,6 +2,7 @@ import package_manager
 
 import util
 
+
 class Aptitude(package_manager.PackagerManager):
 
     CMD_STR = "aptitude"

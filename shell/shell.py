@@ -5,34 +5,34 @@ import subprocess
 
 from util import util
 
-
 LINK_FILES = [
-        # GIT
-        ('gitconfig',         '~/.gitconfig'),
-        ('gitignore',         '~/.gitignore'),
+    # GIT
+    ('gitconfig', '~/.gitconfig'),
+    ('gitignore', '~/.gitignore'),
 
-        # ZSH
-        ('zlogin',            '~/.zlogin'),
-        ('zlogout',           '~/.zlogout'),
-        ('zpreztorc',         '~/.zpreztorc'),
-        ('zprofile',          '~/.zprofile'),
-        ('zshenv',            '~/.zshenv'),
-        ('zshrc',             '~/.zshrc'),
+    # ZSH
+    ('zlogin', '~/.zlogin'),
+    ('zlogout', '~/.zlogout'),
+    ('zpreztorc', '~/.zpreztorc'),
+    ('zprofile', '~/.zprofile'),
+    ('zshenv', '~/.zshenv'),
+    ('zshrc', '~/.zshrc'),
 
-        # BASH
-        ('profile',           '~/.profile'),
-        ('bashrc',            '~/.bashrc'),
-        ]
+    # BASH
+    ('profile', '~/.profile'),
+    ('bashrc', '~/.bashrc'),
+]
 
-PACKAGES = [
-        ('https://github.com/oahzjh/prezto.git', '~/.zprezto', None),
-        ('https://github.com/junegunn/fzf.git', '~/.fzf/', '~/.fzf/install')]
+PACKAGES = [('https://github.com/oahzjh/prezto.git', '~/.zprezto', None),
+            ('https://github.com/junegunn/fzf.git', '~/.fzf/',
+             '~/.fzf/install')]
 
 
 def _download_git_repo(git_url, install_folder, install_script):
     print("install github at: %s" % install_folder)
     if not os.path.exists(install_folder):
-        cmd_str = "git clone --depth 1 --recursive %s %s" % (git_url, install_folder)
+        cmd_str = "git clone --depth 1 --recursive %s %s" % (git_url,
+                                                             install_folder)
         subprocess.check_call(cmd_str.split())
     else:
         old_cwd = os.getcwd()
@@ -63,9 +63,10 @@ def install():
 
     # Download git repo to destination location
     for git_url, install_folder, install_script in PACKAGES:
-        install_folder = os.path.abspath(util.fix_home_path(install_folder));
+        install_folder = os.path.abspath(util.fix_home_path(install_folder))
         if install_script:
-            install_script = os.path.abspath(util.fix_home_path(install_script));
+            install_script = os.path.abspath(
+                util.fix_home_path(install_script))
         _download_git_repo(git_url, install_folder, install_script)
 
 
@@ -86,4 +87,3 @@ def checkdeps():
 
 
 __all__ = ['install', 'uninstall', 'verify', 'dryrun', 'checkdeps']
-
