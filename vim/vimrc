@@ -78,7 +78,7 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <C-p> :TmuxNavigatePrevious<cr>
 
 noremap <leader>l :Align
-nnoremap <leader>a :Ag<space>
+nnoremap <leader>f :FormatCode<CR>
 nnoremap <leader>t :FZF<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 
