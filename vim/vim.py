@@ -1,4 +1,3 @@
-from git import git
 from util import util
 
 import subprocess
@@ -86,7 +85,7 @@ def dryrun():
 
 
 def checkdeps():
-    return git.checkdeps()
+    return True
 
 
 __all__ = ['install', 'uninstall', 'verify', 'dryrun', 'checkdeps']
