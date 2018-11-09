@@ -5,7 +5,7 @@ fi
 
 source ${CURR_FILE_DIR}/shell_helper
 
-if [ -z $SSH_AGENT_PID ]; then
+if [ -z $SSH_AUTH_SOCK ]; then
 source ${CURR_FILE_DIR}/shellrc.ssh.generic
 fi
 
