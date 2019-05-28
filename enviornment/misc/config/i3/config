@@ -116,6 +116,10 @@ bindsym $mod+Shift+Down exec i3-msg move workspace to output down
 bindsym $mod+Shift+Up exec i3-msg move workspace to output up
 bindsym $mod+Shift+Right exec i3-msg move workspace to output right
 
+# Extend monitor to top
+bindsym $mod+Shift+o exec mons -o
+bindsym $mod+Shift+p exec mons -e top
+
 # Screen shot
 bindsym $mod+F11 exec "import -window root ~/Downloads/Screenshot$(date +%F%H:%M:%S).png"
 
