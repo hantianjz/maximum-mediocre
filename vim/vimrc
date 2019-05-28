@@ -26,7 +26,7 @@ set cino=(0
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
 set backupcopy=yes                                           " see :help crontab
-set clipboard+=unnamedplus                                    " yank and paste with the system clipboard
+set clipboard+=unnamedplus                                   " yank and paste with the system clipboard
 set directory-=.                                             " don't store swapfiles in the current directory
 set encoding=utf-8
 set expandtab                                                " expand tabs to spaces
@@ -215,3 +215,5 @@ endfunction
 let g:gutentags_generate_on_write=0
 
 let g:airline_theme='base16_bright'
+
+autocmd Filetype python setlocal ts=2 sw=2 expandtab

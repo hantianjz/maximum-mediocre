@@ -35,7 +35,7 @@ def _install_github_bundle(rootdir, user, package):
         old_cwd = os.getcwd()
         try:
             os.chdir(install_folder)
-            cmd_str = "python install.py --clang-completer --system-libclang"
+            cmd_str = "python install.py --clang-completer"
             subprocess.check_call(cmd_str.split())
         finally:
             os.chdir(old_cwd)
