@@ -1,4 +1,3 @@
-from git import git
 from util import util
 
 import subprocess
