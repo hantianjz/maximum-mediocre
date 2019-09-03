@@ -17,6 +17,9 @@ endif
 
 call vundle#end()
 
+call glaive#Install()
+
+filetype on
 " ensure ftdetect et al work by including this after the Vundle stuff
 filetype plugin indent on
 
@@ -175,7 +178,7 @@ let g:semanticPersistCache = 1
 let g:semanticUseCache = 1
 let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
-let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java"]
+let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java", "gn", "gni"]
 
 let g:ycm_filetype_blacklist = {
       \ 'tagbar' : 1,
@@ -217,3 +220,4 @@ let g:gutentags_generate_on_write=0
 let g:airline_theme='base16_bright'
 
 autocmd Filetype python setlocal ts=2 sw=2 expandtab
+
