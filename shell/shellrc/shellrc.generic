@@ -43,3 +43,5 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 
 export FZF_TMUX_HEIGHT=15
+
+export REVIEW_BASE=master
