@@ -7,8 +7,8 @@
 [status]
 	showUntrackedFiles = all
 [alias]
-  files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\") 
-  stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+  files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-master}\") 
+  stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-master}\")
 [branch]
 	autosetupmerge = true
 [merge]
