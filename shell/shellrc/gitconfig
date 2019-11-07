@@ -1,58 +1,73 @@
+[user]
+  name = James Zhao
 [push]
-	config = default
-	default = current
+  config = default
+  default = current
 [diff]
-	renames = true
-	compactionHeuristic = true
+  renames = true
+  compactionHeuristic = true
 [status]
-	showUntrackedFiles = all
+  showUntrackedFiles = all
 [alias]
-  files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-master}\") 
+  files = !git diff --name-only $(git merge-base HEAD \"${REVIEW_BASE:-master}\")
   stat = !git diff --stat $(git merge-base HEAD \"${REVIEW_BASE:-master}\")
+  # NOTE: These aliases depend on the `git files` alias from
+  # a few sections ago!
+
+  # Open all files changed since REVIEW_BASE in Vim tabs
+  # Then, run fugitive's :Gdiff in each tab, and finally
+  # tell vim-gitgutter to show +/- for changes since REVIEW_BASE
+  review = !vim -p $(git files) +\"tabdo Gdiff ${REVIEW_BASE:-master}\" +\"let g:gitgutter_diff_base = '${REVIEW_BASE:-master}'\"
+
+  # Same as the above, except specify names of files as arguments,
+  # instead of opening all files:
+  # git reviewone foo.js bar.js
+  reviewone = !vim -p +\"tabdo Gdiff ${REVIEW_BASE:-master}\" +\"let g:gitgutter_diff_base = '${REVIEW_BASE:-master}'\"
 [branch]
-	autosetupmerge = true
+  autosetupmerge = true
 [merge]
-	summary = true
-	conflictstyle = diff3
+  summary = true
+  conflictstyle = diff3
 [rebase]
-	autosquash = true
+  autosquash = true
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-	interactive = auto
-	ui = true
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
 [core]
-	excludesfile = ~/.gitignore
-	editor = nvim
-	pager = diff-highlight | less --tabs=4 -RFX
+  excludesfile = ~/.gitignore
+  editor = nvim
+  pager = diff-highlight | less --tabs=4 -RFX
 [rerere]
-	enabled = 1
+  enabled = 1
 [pull]
-	rebase = true
+  rebase = true
 [include]
-	path = ~/.gitconfig_local
+  path = ~/.gitconfig_local
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
 [pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
+  log = diff-highlight | less
+  show = diff-highlight | less
+  diff = diff-highlight | less
 [interactive]
-	diffFilter = diff-highlight
+  diffFilter = diff-highlight
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 [color "diff"]
-	meta = yellow
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-[include]
-    path = ~/.gitconfig_local
+  meta = yellow
+  frag = magenta bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+[credential]
+  helper = corpsso
