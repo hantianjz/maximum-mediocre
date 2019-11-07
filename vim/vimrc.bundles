@@ -1,3 +1,5 @@
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'jaxbot/semantic-highlight.vim'
 Plugin 'austintaylor/vim-indentobject'
 Plugin 'christoomey/vim-tmux-navigator'
