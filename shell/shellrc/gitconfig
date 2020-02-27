@@ -23,6 +23,7 @@
   # instead of opening all files:
   # git reviewone foo.js bar.js
   reviewone = !vim -p +\"tabdo Gdiff ${REVIEW_BASE:-master}\" +\"let g:gitgutter_diff_base = '${REVIEW_BASE:-master}'\"
+	lg = log --topo-order --all --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
 [branch]
   autosetupmerge = true
 [merge]
@@ -71,3 +72,4 @@
   whitespace = red reverse
 [credential]
   helper = corpsso
+  helper = cache --timeout=3600
