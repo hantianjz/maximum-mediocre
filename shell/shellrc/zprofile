@@ -9,3 +9,5 @@ CURR_FILE_DIR="$(cd "$(dirname "${CURR_FILE}" )" && pwd )"
 
 unset CURR_FILE_DIR
 
+
+export PATH="$HOME/.cargo/bin:$PATH"
