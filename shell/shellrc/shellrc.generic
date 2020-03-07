@@ -7,11 +7,7 @@ source ${CURR_FILE_DIR}/shell_helper
 
 export PATH=$PATH:~/bin
 
-if [ `uname` = "Linux" ]; then
-    export PATH=$PATH:~/.local/bin
-    # TODO: Check if JAVA_HOME need to be set
-elif [ `uname` = "Darwin" ]; then
-    export PATH=$PATH:~/Library/Python/2.7/bin
+if [ `uname` = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 fi
 
