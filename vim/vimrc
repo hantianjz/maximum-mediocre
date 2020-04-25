@@ -90,21 +90,6 @@ noremap <leader>C :SemanticHighlightToggle<CR>
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
 
-" plugin settings
-" let g:ctrlp_match_window = 'order:ttb,max:20'
-let g:gitgutter_enabled = 0
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  let g:ackprg = 'ag -i --nogroup --column'
-
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
 autocmd BufRead,BufNewFile *.def set filetype=c
 autocmd BufRead,BufNewFile *.ino set filetype=c
 autocmd BufRead,BufNewFile *.i set filetype=c
@@ -141,6 +126,7 @@ if filereadable(expand("~/.vimrc.local"))
 endif
 
 colorscheme duoduo
+
 
 set cursorline
 set cursorcolumn
@@ -198,9 +184,6 @@ let g:ycm_filetype_blacklist = {
       \ 'sh' : 1
       \}
 
-" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-
 " FZF
 set rtp+=~/.fzf/
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
@@ -214,8 +197,6 @@ function TabSpace(count)
     let &shiftwidth=a:count
     let &tabstop=a:count
 endfunction
-
-let g:gutentags_generate_on_write=0
 
 let g:airline_theme='base16_bright'
 
