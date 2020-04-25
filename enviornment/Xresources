@@ -48,8 +48,8 @@ URxvt.lineSpace:            0
 
 ! Fonts
 URxvt.allow_bold:           true
-URxvt.font:     xft:DejavuSansMono:size=8:antialias=true
-URxvt.boldFont: xft:DejavuSansMono:bold:size=8:antialias=true
+URxvt.font:     xft:DejavuSansMono:size=7:antialias=true
+URxvt.boldFont: xft:DejavuSansMono:bold:size=7:antialias=true
 
 ! Fix font space
 URxvt*letterSpace: -1
