@@ -19,12 +19,12 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/carbonblack]
-;monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:}
 width = 100%
-height = 27
+height = 20
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 5.0
 fixed-center = false
 
 background = ${colors.background}
@@ -34,7 +34,7 @@ bottom=true
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 2
 border-color = #00000000
 
 padding-left = 0
@@ -43,13 +43,13 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = "Wuncon Siji:pixelsize=10;1"
+font-0 = fixed:pixelsize=8;1
+font-1 = unifont:fontformat=truetype:size=7:antialias=true;0
+font-2 = "Wuncon Siji:pixelsize=8;1"
 
 modules-left = i3
 modules-center = 
-modules-right = xbacklight volume wlan xkeyboard memory cpu temperature battery date
+modules-right = xbacklight volume eth wlan memory cpu temperature battery date
 
 tray-position = right
 tray-padding = 2
@@ -188,7 +188,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = "C "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
 label = %percentage%%
@@ -196,14 +196,14 @@ label = %percentage%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "M "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp4s0
+interface = wlp2s0
 interval = 3.0
 
 format-connected = <label-connected>
@@ -217,7 +217,7 @@ label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = net0
+interface = enx3ce1a149318d
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -287,7 +287,7 @@ format-charging-underline = #ffb52a
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
+format-full-prefix = "B "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
