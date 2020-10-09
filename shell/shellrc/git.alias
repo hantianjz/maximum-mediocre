@@ -117,3 +117,5 @@ alias gwd='git diff --no-ext-diff --word-diff'
 alias gclean="git clean -dff && git submodule foreach git clean -dff"
 
 alias gis='git status'
+
+alias gprune='git fetch -p && git branch -r | cut -d" " -f 3 | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | cut -d" " -f 3 | xargs git branch -D'
