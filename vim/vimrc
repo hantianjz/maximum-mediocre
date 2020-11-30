@@ -219,3 +219,7 @@ noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
 
 noremap <leader>x :%! xxd<cr>
 noremap <leader>X :%! xxd -r<cr>
+
+augroup autoformat_settings
+  autocmd FileType json AutoFormatBuffer jsformat
+augroup END
