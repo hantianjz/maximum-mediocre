@@ -24,6 +24,7 @@ fi
 alias cd=pushd
 
 source ${CURR_FILE_DIR}/shellrc.generic
+source ${CURR_FILE_DIR}/github.generic
 
 if exist tmuxinator; then
 	source ${CURR_FILE_DIR}/tmuxinator.bash

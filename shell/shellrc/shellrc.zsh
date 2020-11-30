@@ -8,6 +8,7 @@ CURR_FILE_DIR="$(cd "$(dirname "${CURR_FILE}" )" && pwd )"
 #*****************CURR_FILE_DIR*****************
 
 source ${CURR_FILE_DIR}/shellrc.generic
+source ${CURR_FILE_DIR}/github.generic
 
 if exist tmuxinator; then
 	source ${CURR_FILE_DIR}/tmuxinator.zsh
