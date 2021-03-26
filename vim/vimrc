@@ -155,7 +155,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:syntastic_enable_highlighting = 0
 
 let g:syntastic_python_checkers=["flake8"]
-let g:syntastic_python_flake8_args="--ignore=E501"
+let g:syntastic_python_flake8_args="--ignore=E501,E111,E114,E251"
 autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
 nnoremap <Leader>q :Bdelete<CR>
@@ -202,7 +202,7 @@ let g:airline_theme='base16_bright'
 
 autocmd Filetype python setlocal ts=2 sw=2 expandtab
 
-let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase']
+let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase', 'diff']
 let g:gutentags_generate_on_write = 1
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
 let g:gutentags_project_root = ['.git']
@@ -220,6 +220,6 @@ noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
 noremap <leader>x :%! xxd<cr>
 noremap <leader>X :%! xxd -r<cr>
 
-augroup autoformat_settings
-  autocmd FileType json AutoFormatBuffer jsformat
-augroup END
+" augroup autoformat_settings
+"   autocmd FileType json AutoFormatBuffer jsformat
+" augroup END
