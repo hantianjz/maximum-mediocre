@@ -5,7 +5,7 @@ import importlib
 
 import os
 
-MODULE_LIST = ["package", "vim", "tmux", "shell"]
+MODULE_LIST = ["vim", "tmux", "shell"] # "package", 
 
 
 def get_args():

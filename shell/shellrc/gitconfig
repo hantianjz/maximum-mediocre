@@ -14,16 +14,6 @@
   # NOTE: These aliases depend on the `git files` alias from
   # a few sections ago!
 
-  # Open all files changed since REVIEW_BASE in Vim tabs
-  # Then, run fugitive's :Gdiff in each tab, and finally
-  # tell vim-gitgutter to show +/- for changes since REVIEW_BASE
-  review = !vim -p $(git files) +\"tabdo Gdiff ${REVIEW_BASE:-master}\" +\"let g:gitgutter_diff_base = '${REVIEW_BASE:-master}'\"
-
-  # Same as the above, except specify names of files as arguments,
-  # instead of opening all files:
-  # git reviewone foo.js bar.js
-  reviewone = !vim -p +\"tabdo Gdiff ${REVIEW_BASE:-master}\" +\"let g:gitgutter_diff_base = '${REVIEW_BASE:-master}'\"
-	lg = log --topo-order --all --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
 [branch]
   autosetupmerge = true
 [merge]
@@ -70,6 +60,3 @@
   old = red bold
   new = green bold
   whitespace = red reverse
-[credential]
-  helper = corpsso
-  helper = cache --timeout=3600
