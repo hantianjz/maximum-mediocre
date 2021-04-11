@@ -202,7 +202,7 @@ let g:airline_theme='base16_bright'
 
 autocmd Filetype python setlocal ts=2 sw=2 expandtab
 
-let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase', 'diff']
+let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase', 'diff', 'zsh', 'sh']
 let g:gutentags_generate_on_write = 1
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
 let g:gutentags_project_root = ['.git']
@@ -219,6 +219,8 @@ noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
 
 noremap <leader>x :%! xxd<cr>
 noremap <leader>X :%! xxd -r<cr>
+
+nnoremap <leader>y :UndotreeToggle<cr>
 
 " augroup autoformat_settings
 "   autocmd FileType json AutoFormatBuffer jsformat
