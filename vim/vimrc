@@ -205,7 +205,7 @@ autocmd Filetype python setlocal ts=2 sw=2 expandtab
 let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase', 'diff', 'zsh', 'sh', 'conf']
 let g:gutentags_generate_on_write = 1
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
-let g:gutentags_project_root = ['.git']
+let g:gutentags_project_root = ['.gn', '.git']
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_plus_switch = 1
 let g:gutentags_plus_nomap = 1

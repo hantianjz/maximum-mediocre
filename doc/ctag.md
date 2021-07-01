@@ -1,0 +1,3 @@
+install:
+- global
+- exuberant-ctags
