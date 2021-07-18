@@ -162,7 +162,15 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- LSP
-require'lspconfig'.clangd.setup{}
+--require'lspconfig'.ccls.setup{}
+local lspconfig = require'lspconfig'
+lspconfig.ccls.setup {
+  init_options = {
+    diagnostics = {
+      onOpen = 1;
+    }
+  }
+}
 
 -- nvim-compe
 vim.o.completeopt = "menuone,noselect"
