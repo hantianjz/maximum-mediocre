@@ -16,7 +16,6 @@ if filereadable(expand("~/.vimrc.bundles"))
 endif
 
 call vundle#end()
-
 call glaive#Install()
 
 filetype on
@@ -82,10 +81,9 @@ nnoremap <silent> <C-p> :TmuxNavigatePrevious<cr>
 
 noremap <leader>l :Align
 nnoremap <leader>f :FormatCode<CR>
-nnoremap <leader>t :FZF<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 
-noremap <leader>C :SemanticHighlightToggle<CR>
+noremap <leader>C :SemanticHighlight<CR>
 
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
@@ -133,62 +131,7 @@ set cursorcolumn
 set noswapfile
 set tags=tags;/
 
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-let g:ycm_confirm_extra_conf = 0
-
-let g:syntastic_quiet_messages = { "level": "warnings" }
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '!'
-
-let g:syntastic_c_no_default_include_dirs = 1
-let g:syntastic_c_check_header = 1
-let g:syntastic_c_include_dirs = [ 'inc', 'includes' ]
-let g:syntastic_c_compiler = 'gcc'
-let g:syntastic_c_auto_refresh_includes = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:syntastic_enable_highlighting = 0
-
-let g:syntastic_python_checkers=["flake8"]
-let g:syntastic_python_flake8_args="--ignore=E501,E111,E114,E251"
-autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
-
 nnoremap <Leader>q :Bdelete<CR>
-
-let g:semanticPersistCache = 1
-let g:semanticUseCache = 1
-let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-
-let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java", "gn", "gni", "cc"]
-
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'vim' : 1,
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'unite' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'pandoc' : 1,
-      \ 'infolog' : 1,
-      \ 'mail' : 1,
-      \ 'gitcommit' : 1,
-      \ 'make' : 1,
-      \ 'conf' : 1,
-      \ 'sh' : 1
-      \}
-
-" FZF
-set rtp+=~/.fzf/
-let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-let g:fzf_height = 10
-let g:fzf_buffers_jump = 1
 
 " Change tabspace
 function TabSpace(count)
@@ -202,26 +145,64 @@ let g:airline_theme='base16_bright'
 
 autocmd Filetype python setlocal ts=2 sw=2 expandtab
 
-let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase', 'diff', 'zsh', 'sh', 'conf']
-let g:gutentags_generate_on_write = 1
-let g:gutentags_modules = ['ctags', 'gtags_cscope']
-let g:gutentags_project_root = ['.gn', '.git']
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-let g:gutentags_plus_switch = 1
-let g:gutentags_plus_nomap = 1
-let g:gutentags_define_advanced_commands = 0
-
-noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
-noremap <silent> <leader>gd :GscopeFind g <C-R><C-W><cr>
-noremap <silent> <leader>gf :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
-
 noremap <leader>x :%! xxd<cr>
 noremap <leader>X :%! xxd -r<cr>
 
-nnoremap <leader>y :UndotreeToggle<cr>
+let g:semanticPersistCache = 1
+let g:semanticUseCache = 1
+let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
-" augroup autoformat_settings
-"   autocmd FileType json AutoFormatBuffer jsformat
-" augroup END
+let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java", "gn", "gni", "cc"]
+
+lua <<EOF
+-- neovim-treesitter
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  -- ignore_install = {  }, -- List of parsers to ignore installing
+}
+
+-- LSP
+require'lspconfig'.clangd.setup{}
+
+-- nvim-compe
+vim.o.completeopt = "menuone,noselect"
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  resolve_timeout = 800;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = {
+    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  };
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = true;
+    ultisnips = true;
+    luasnip = true;
+  };
+}
+
+EOF
+
+" Telescope
+nnoremap <leader>t <cmd>Telescope find_files<cr>
+nnoremap <leader>g <cmd>Telescope live_grep<cr>
+nnoremap <leader>b <cmd>Telescope buffers<cr>

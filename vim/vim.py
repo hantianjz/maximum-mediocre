@@ -31,16 +31,6 @@ def _install_github_bundle(rootdir, user, package):
         finally:
             os.chdir(old_cwd)
 
-    if package == "YouCompleteMe":
-        old_cwd = os.getcwd()
-        try:
-            os.chdir(install_folder)
-            cmd_str = "./install.py --clang-completer"
-            subprocess.check_call(cmd_str.split())
-        finally:
-            os.chdir(old_cwd)
-
-
 def _install():
     try:
         os.makedirs("dot_vim/backup")
