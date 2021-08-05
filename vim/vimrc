@@ -125,7 +125,6 @@ endif
 
 colorscheme duoduo
 
-
 set cursorline
 set cursorcolumn
 set noswapfile
@@ -155,20 +154,20 @@ let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java", "gn", "gni", "cc"]
 
 lua <<EOF
--- neovim-treesitter
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  -- ignore_install = {  }, -- List of parsers to ignore installing
-}
-
 -- LSP
---require'lspconfig'.ccls.setup{}
 local lspconfig = require'lspconfig'
+
 lspconfig.ccls.setup {
   init_options = {
     diagnostics = {
-      onOpen = 1;
-    }
+      onChange = 1;
+    };
+    index = {
+      comments = 0;
+    };
+    clang = {
+      excludeArgs = {};
+    };
   }
 }
 
@@ -230,9 +229,56 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+local actions = require('telescope.actions')
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close
+      },
+    },
+  };
+  extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        }
+  }
+}
+require('telescope').load_extension('fzy_native')
+
+local M = {}
+
+M.project_files = function()
+  local opts = {} -- define here if you want to define something
+  local ok = pcall(require'telescope.builtin'.git_files, opts)
+  if not ok then require'telescope.builtin'.find_files(opts) end
+end
+
+return M
+
 EOF
 
 " Telescope
 nnoremap <leader>t <cmd>Telescope find_files<cr>
-nnoremap <leader>g <cmd>Telescope live_grep<cr>
+nnoremap <leader>n <cmd>Telescope file_browser<cr>
+nnoremap <leader>e <cmd>Telescope live_grep<cr>
 nnoremap <leader>b <cmd>Telescope buffers<cr>
+
+nmap - <cmd>e %:h<cr>
+
+let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase', 'diff', 'zsh', 'sh', 'conf']
+let g:gutentags_generate_on_write = 1
+let g:gutentags_modules = ['gtags_cscope']
+let g:gutentags_project_root = ['.gn']
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_plus_switch = 1
+let g:gutentags_plus_nomap = 1
+let g:gutentags_define_advanced_commands = 0
+
+noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>gd :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>gf :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>

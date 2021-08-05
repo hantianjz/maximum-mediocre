@@ -37,6 +37,7 @@ fi
 
 if exist nvim; then
     alias vim=nvim
+    alias vi=nvim
     alias v=nvim
 fi
 
