@@ -133,30 +133,6 @@ set cursorcolumn
 set noswapfile
 set tags=tags;/
 
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-let g:ycm_confirm_extra_conf = 0
-
-let g:syntastic_quiet_messages = { "level": "warnings" }
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '!'
-
-let g:syntastic_c_no_default_include_dirs = 1
-let g:syntastic_c_check_header = 1
-let g:syntastic_c_include_dirs = [ 'inc', 'includes' ]
-let g:syntastic_c_compiler = 'gcc'
-let g:syntastic_c_auto_refresh_includes = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:syntastic_enable_highlighting = 0
-
-let g:syntastic_python_checkers=["flake8"]
-let g:syntastic_python_flake8_args="--ignore=E501,E111,E114,E251"
-autocmd FileType c nnoremap <buffer> <silent> <C-]> :YcmCompleter GoTo<cr>
 
 nnoremap <Leader>q :Bdelete<CR>
 
@@ -165,24 +141,6 @@ let g:semanticUseCache = 1
 let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
 let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java", "gn", "gni", "cc"]
-
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'vim' : 1,
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'unite' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'pandoc' : 1,
-      \ 'infolog' : 1,
-      \ 'mail' : 1,
-      \ 'gitcommit' : 1,
-      \ 'make' : 1,
-      \ 'conf' : 1,
-      \ 'sh' : 1
-      \}
 
 " FZF
 set rtp+=~/.fzf/
