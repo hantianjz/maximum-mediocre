@@ -81,6 +81,7 @@ nnoremap <silent> <C-p> :TmuxNavigatePrevious<cr>
 
 noremap <leader>l :Align
 nnoremap <leader>f :FormatCode<CR>
+nnoremap <leader>t :FZF<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 
 noremap <leader>C :SemanticHighlight<CR>
@@ -148,91 +149,103 @@ autocmd Filetype python setlocal ts=2 sw=2 expandtab
 noremap <leader>x :%! xxd<cr>
 noremap <leader>X :%! xxd -r<cr>
 
+" FZF
+set rtp+=~/.fzf/
+let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+let g:fzf_height = 10
+let g:fzf_buffers_jump = 1
+
+" Semantic
 let g:semanticPersistCache = 1
 let g:semanticUseCache = 1
 let g:semanticTermColors = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-
 let g:semanticEnableFileTypes = ["c", "python", "cpp", "cmake", "java", "gn", "gni", "cc"]
 
+" Gtag
+let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase', 'diff', 'zsh', 'sh', 'conf']
+let g:gutentags_generate_on_write = 1
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_project_root = ['.gn']
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_plus_switch = 1
+let g:gutentags_plus_nomap = 1
+let g:gutentags_define_advanced_commands = 0
+
+noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>gd :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>gf :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+
+
+
+
+
+"""""""""""" LSP-config
+lua << EOF
+-- local lspconfig = require'lspconfig'
+-- lspconfig.ccls.setup {
+--   init_options = {
+--     compilationDatabaseDirectory = "out/tmp/dbg";
+--     index = {
+--       threads = 0;
+--     };
+--     clang = {
+--       excludeArgs = {} ;
+--     };
+--   };
+--   root_dir = lspconfig.util.root_pattern('.gn');
+-- }
+
+--local lspconfig = require'lspconfig'
+--lspconfig.clangd.setup {
+--  on_attach = on_attach,
+--  root_dir = lspconfig.util.root_pattern('.gn');
+--}
+
+EOF
+"""""""""""" LSP-config
+
+
+
+
+
+"""""""""""" Treesitter
 lua <<EOF
 -- neovim-treesitter
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  -- ignore_install = {  }, -- List of parsers to ignore installing
-}
-
--- LSP
---require'lspconfig'.ccls.setup{}
-local lspconfig = require'lspconfig'
-lspconfig.ccls.setup {
-  init_options = {
-    diagnostics = {
-      onOpen = 1;
-    }
-  }
-}
-
--- nvim-compe setup
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
-
-  source = {
-    path = true;
-    nvim_lsp = true;
-  };
-}
-
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
-
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+-- require'nvim-treesitter.configs'.setup {
+--   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+-- }
 EOF
+"""""""""""" Treesitter
 
-" Telescope
-nnoremap <leader>t <cmd>Telescope find_files<cr>
-nnoremap <leader>g <cmd>Telescope live_grep<cr>
-nnoremap <leader>b <cmd>Telescope buffers<cr>
+
+
+
+"""""""""""" Auto-complete
+lua << EOF
+-- nvim-compe setup
+
+--vim.o.completeopt = "menuone,noselect"
+--require'compe'.setup {
+--  enabled = true;
+--  autocomplete = true;
+--  debug = false;
+--  min_length = 1;
+--  preselect = 'enable';
+--  throttle_time = 80;
+--  source_timeout = 200;
+--  incomplete_delay = 400;
+--  max_abbr_width = 100;
+--  max_kind_width = 100;
+--  max_menu_width = 100;
+--  documentation = true;
+--
+--  source = {
+--    path = true;
+--    nvim_lsp = true;
+--  };
+--}
+
+EOF
+"""""""""""" Auto-complete
