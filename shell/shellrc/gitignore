@@ -8,3 +8,6 @@ application_default_credentials.json
 .venv
 compile_commands.json
 .style.yapf
+GPATH
+GRTAGS
+GTAGS
