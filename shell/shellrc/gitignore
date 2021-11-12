@@ -11,3 +11,6 @@ compile_commands.json
 GPATH
 GRTAGS
 GTAGS
+.ccls-cache
+.ccls
+.cache
