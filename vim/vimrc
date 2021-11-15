@@ -164,7 +164,6 @@ let g:gutentags_exclude_filetypes = ['gitcommit', 'python', 'gitrebase', 'diff',
 let g:gutentags_generate_on_write = 1
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
 let g:gutentags_project_root = ['.gn', '.git']
-" let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_plus_switch = 1
 let g:gutentags_plus_nomap = 1
 let g:gutentags_define_advanced_commands = 0
@@ -178,9 +177,6 @@ noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
 noremap <leader>x :%! xxd<cr>
 noremap <leader>X :%! xxd -r<cr>
 
-" augroup autoformat_settings
-"   autocmd FileType json AutoFormatBuffer jsformat
-" augroup END
 au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 
 lua <<EOF
@@ -265,4 +261,3 @@ nvim_lsp.ccls.setup{
 }
 
 EOF
-
