@@ -5,7 +5,7 @@ import importlib
 
 import os
 
-MODULE_LIST = ["vim", "tmux", "shell"] # "package", 
+MODULE_LIST = ["vim", "tmux", "shell"]  # "package",
 
 
 def get_args():
@@ -16,8 +16,9 @@ def get_args():
     parser.add_argument("--dryrun", action="store_true", default=False)
     parser.add_argument("--checkdeps", action="store_true", default=False)
     for module in MODULE_LIST:
-        parser.add_argument(
-            "--%s" % module, action="store_true", default=False)
+        parser.add_argument("--%s" % module,
+                            action="store_true",
+                            default=False)
     return parser.parse_args()
 
 
