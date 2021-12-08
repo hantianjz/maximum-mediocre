@@ -31,7 +31,7 @@ set backspace=2                                              " Fix broken backsp
 set backupcopy=yes                                           " see :help crontab
 set clipboard+=unnamedplus                                   " yank and paste with the system clipboard
 set directory-=.                                             " don't store swapfiles in the current directory
-set encoding=utf-8
+set encoding=UTF-8
 set expandtab                                                " expand tabs to spaces
 set ignorecase                                               " case-insensitive search
 set incsearch                                                " search as you type
@@ -172,7 +172,6 @@ noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>gd :GscopeFind g <C-R><C-W><cr>
 noremap <silent> <leader>gf :GscopeFind c <C-R><C-W><cr>
 noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
 
 noremap <leader>x :%! xxd<cr>
 noremap <leader>X :%! xxd -r<cr>
@@ -256,7 +255,7 @@ nvim_lsp.ccls.setup{
   },
   cmd = { "ccls" },
   filetypes = {"c", "cc", "cpp", "h"},
-  root_dir = nvim_lsp.util.root_pattern(".git"),
+  root_dir = nvim_lsp.util.root_pattern("compile_commands.json"),
   capabilities = capabilities
 }
 

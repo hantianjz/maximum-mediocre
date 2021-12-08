@@ -20,7 +20,7 @@ UXTerm.vt100.metaSendsEscape: true
 
 UXTerm.vt100.scrollBar: false
 
-UXTerm.vt100.faceName: Dejavu Sans Mono:size=8:antialias=true
+UXTerm.vt100.faceName: Dejavu Sans Mono:size=7:antialias=true
 UXTerm.vt100.font: 7x13
 
 UXTerm.vt100.backarrowKey: false
@@ -48,8 +48,8 @@ URxvt.lineSpace:            0
 
 ! Fonts
 URxvt.allow_bold:           true
-URxvt.font:     xft:DejavuSansMono:size=7:antialias=true
-URxvt.boldFont: xft:DejavuSansMono:bold:size=7:antialias=true
+URxvt.font:     xft:DejavuSansMono:size=8:antialias=true
+URxvt.boldFont: xft:DejavuSansMono:bold:size=8:antialias=true
 
 ! Fix font space
 URxvt*letterSpace: -1
